@@ -37,6 +37,7 @@ class OnboardingScreen extends StatelessWidget {
                 text: 'Skip',
                 isDark: cubit.isDark,
               ),
+
               Expanded(
                 child: PageView(
                   onPageChanged: (value) {
