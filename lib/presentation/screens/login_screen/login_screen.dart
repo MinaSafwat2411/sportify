@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sportify/core/utils/validators.dart';
 
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/custom_big_textfield.dart';
@@ -36,15 +37,38 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 25),
                       CustomBigTextField(
+                        observe: false,
                         label: 'Email',
                         controller: cubit.emailController,
                         isDark: false,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          if (!Validators.isValidEmail(value)) {
+                            return 'Please enter a valid email';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 25),
                       CustomBigTextField(
+                        observe: true,
                         label: 'Password',
-                        controller: cubit.emailController,
+                        controller: cubit.passwordController,
                         isDark: false,
+                      ),
+                      const SizedBox(height: 25,),
+                      CustomButton(
+                        height: 55,
+                        onPressed: () {
+                          if(cubit.formKey.currentState!.validate()){
+                            cubit.login();
+                          }
+                        },
+                        btnColor: cubit.isDark? AppColors.white:AppColors.mirage2,
+                        text: 'Login',
+                        isDark: cubit.isDark,
                       ),
                       const SizedBox(height: 8),
                       Row(
@@ -76,21 +100,18 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 25,),
-                      CustomButton(
-                        height: 55,
-                        onPressed: () {
-                          context.replace(AppRoutePaths.home);
-                        },
-                        btnColor: cubit.isDark? AppColors.white:AppColors.mirage2,
-                        text: 'Login',
-                        isDark: cubit.isDark,
-                      )
                     ],
                   ),
                 ),
               ),
             ),
-        listener: (context, state) {});
+        listener: (context, state) {
+          if(state is LoginSuccessState){
+            context.replace(AppRoutePaths.home);
+          }
+        },
+        listenWhen: (previous, current) => current is LoginSuccessState,
+        buildWhen: (previous, current) => current is LoginErrorState || current is LoginLoadingState,
+    );
   }
 }

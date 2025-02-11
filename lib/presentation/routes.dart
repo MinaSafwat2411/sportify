@@ -16,7 +16,7 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(path: AppRoutePaths.login, name: AppRoutes.login.name, builder: (context, state) => const LoginScreen()),
     GoRoute(path: AppRoutePaths.splash, name: AppRoutes.splash.name, builder: (context, state) => const SplashScreen()),
-    GoRoute(path: AppRoutePaths.home, name: AppRoutes.home.name, builder: (context, state) => Text('home')),
+    GoRoute(path: AppRoutePaths.home, name: AppRoutes.home.name, builder: (context, state) => const Text('home')),
     GoRoute(path: AppRoutePaths.onboarding, name: AppRoutes.onboarding.name, builder: (context, state) => const OnboardingScreen()),
   ],
 );

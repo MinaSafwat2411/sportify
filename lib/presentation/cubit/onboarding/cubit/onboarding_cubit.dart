@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:sportify/core/utils/cache_helper.dart';
-import 'package:sportify/presentation/routes.dart';
+import '../../../../data/services/cache_helper.dart';
 import '../states/onboarding_states.dart';
 
 class OnboardingCubit extends Cubit<OnboardingStates> {

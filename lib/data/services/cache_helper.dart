@@ -38,6 +38,9 @@ class CacheHelper{
     if (value is String) return await sharedPreferences!.setString(key!, value);
     if (value is int) return await sharedPreferences!.setInt(key!, value);
     if (value is double) return await sharedPreferences!.setDouble(key!, value);
+    if (value is List<String>) return await sharedPreferences!.setStringList(key!, value);
+    if (value is List<int>) return await saveIntList(key: key, value: value);
+    if (value is Map<String, dynamic>) return await sharedPreferences!.setString(key!, value.toString());
     throw ArgumentError('Invalid type');
   }
 

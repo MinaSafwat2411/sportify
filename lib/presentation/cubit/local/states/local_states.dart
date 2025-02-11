@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
 
 abstract class LocaleStates {
   final Locale locale;
@@ -8,17 +7,17 @@ abstract class LocaleStates {
 }
 
 class LocaleInitial extends LocaleStates {
-  const LocaleInitial(Locale locale) : super(locale);
+  const LocaleInitial(super.locale);
 }
 
 class LocaleUpdated extends LocaleStates {
-  const LocaleUpdated(Locale locale) : super(locale);
+  const LocaleUpdated(super.locale);
 }
 
 class LocaleError extends LocaleStates {
-  const LocaleError(Locale locale) : super(locale);
+  const LocaleError(super.locale);
 }
 
 class LocaleLoading extends LocaleStates {
-   LocaleLoading() : super(Locale('en')); // Default language during loading
+   LocaleLoading() : super(const Locale('en'));
 }

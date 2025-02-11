@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sportify/core/utils/cache_helper.dart';
 import 'package:sportify/presentation/cubit/local/cubit/local_cubit.dart';
 import 'package:sportify/presentation/cubit/local/states/local_states.dart';
 import 'package:sportify/presentation/cubit/login/cubit/login_cubit.dart';
@@ -11,6 +10,7 @@ import 'package:sportify/presentation/routes.dart';
 import 'core/localization/app_localizations.dart';
 import 'core/utils/app_themes.dart';
 import 'data/firebase/firebase_options.dart';
+import 'data/services/cache_helper.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

@@ -7,9 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sportify/core/utils/cache_helper.dart';
 
-import 'package:sportify/main.dart';
 
 void main() async{
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
