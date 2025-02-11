@@ -8,11 +8,15 @@ class CustomBigTextField extends StatelessWidget {
     required this.label,
     required this.controller,
     required this.isDark,
+    required this.observe,
+    this.validator,
   });
 
   final String label;
   final TextEditingController controller;
   final bool isDark;
+  final String? Function(String?)? validator;
+  final bool observe;
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +72,13 @@ class CustomBigTextField extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(8),
           ),
+          fillColor: AppColors.white,
         ),
         autofocus: false,
-        expands: true,
-        maxLines: null,
-        minLines: null,
+        maxLines: 1,
         cursorColor:AppColors.white,
+        validator: validator,
+        obscureText: observe? true:false,
       ),
     );
   }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../routes.dart';
 
 class OnboardingTopButton extends StatelessWidget {
   const OnboardingTopButton({super.key,required this.text,required this.isDark,required this.function});

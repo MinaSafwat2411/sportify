@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:sportify/core/utils/cache_helper.dart';
 
+import '../../../../data/services/cache_helper.dart';
 import '../states/local_states.dart';
 
 class LocaleCubit extends Cubit<LocaleStates> {
