@@ -2,13 +2,17 @@ package com.faswet.sportify.utils.extentions
 
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import com.faswet.sportify.ui.main.MainActivity
 import com.faswet.sportify.ui.main.NavigationScreen
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.zip
@@ -292,4 +296,13 @@ fun Context.updateLocale(locale: Locale): Context {
     val config = Configuration(resources.configuration)
     config.setLocale(locale)
     return createConfigurationContext(config)
+}
+
+fun Activity.restartApp() {
+    val intent = Intent(this, MainActivity::class.java)
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+    this.startActivity(intent)
+    if (this is AppCompatActivity) {
+        this.finish()
+    }
 }

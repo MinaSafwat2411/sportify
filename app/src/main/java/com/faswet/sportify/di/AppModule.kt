@@ -7,7 +7,7 @@ import com.faswet.sportify.data.remote.IRemoteDataSource
 import com.faswet.sportify.data.remote.RemoteDataSource
 import com.faswet.sportify.data.sharedprefrences.IPreferencesDataSource
 import com.faswet.sportify.data.sharedprefrences.PreferencesDataSource
-import com.faswet.sportify.firebase.FirebaseService
+import com.faswet.sportify.firebase.IFirebaseService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -38,7 +38,7 @@ internal class AppModule {
 
     @Provides
     @Singleton
-    fun provideRemoteDataSource(firebaseService: FirebaseService): IRemoteDataSource {
+    fun provideRemoteDataSource(firebaseService: IFirebaseService): IRemoteDataSource {
         return RemoteDataSource(firebaseService)
     }
 

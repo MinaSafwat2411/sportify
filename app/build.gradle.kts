@@ -103,6 +103,7 @@ dependencies {
     // Other required Compose libraries
     implementation(libs.ui)
     implementation(libs.ui.tooling.preview)
+    implementation(libs.androidx.ui.text)
     debugImplementation(libs.ui.tooling)
 
     // Firebase BOM if used
@@ -127,4 +128,7 @@ dependencies {
     implementation(libs.gson)
 
     implementation(libs.androidx.biometric)
+
+    implementation(libs.androidx.security.crypto)
+    implementation(libs.accompanist.systemuicontroller)
 }

@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class BaseRepository(
+open class BaseRepository(
     private val connectionUtils: IConnectionUtils,
     private val mIRemoteDataSource: IRemoteDataSource,
     private val mIPreferencesDataSource: IPreferencesDataSource,

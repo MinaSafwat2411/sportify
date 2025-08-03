@@ -1,5 +1,6 @@
 package com.faswet.sportify.ui.main.contract
 
+import android.content.Context
 import com.faswet.sportify.ui.base.ViewEvent
 import com.faswet.sportify.ui.base.ViewSideEffect
 import com.faswet.sportify.ui.base.ViewState
@@ -12,7 +13,7 @@ class MainContract {
         data object HideBottomNavigationBar : Event()
 
         data class NavigateItem(val item: NavigationScreen.BottomNavItem): Event()
-        data class ChangeLanguage(val langCode: String) : Event()
+        data class ChangeLanguage(val langCode: String, val context: Context) : Event()
         data class ToggleTheme(val isDarkMode: Boolean) : Event()
     }
 

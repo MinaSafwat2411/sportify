@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -40,6 +41,7 @@ fun AppNavHost(
         mutableStateOf(true)
     }
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
         contentWindowInsets = WindowInsets.ime, modifier = Modifier
             .windowInsetsPadding(WindowInsets.safeDrawing),
         bottomBar = {
@@ -50,7 +52,7 @@ fun AppNavHost(
             startDestination = startDestination
         ) {
             composable(NavigationScreen.Splash.route) {
-
+                ThemeAndLanguageControls(viewModel)
             }
             composable(NavigationScreen.OnBoarding.route) {
 

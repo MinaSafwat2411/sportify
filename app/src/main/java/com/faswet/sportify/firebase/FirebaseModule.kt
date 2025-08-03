@@ -15,6 +15,7 @@ import com.google.firebase.inappmessaging.FirebaseInAppMessaging
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader
+import dagger.Binds
 
 import dagger.Module
 import dagger.Provides
@@ -88,4 +89,14 @@ object FirebaseModule {
     @Provides
     @Singleton
     fun provideFirebaseModelDownloader(): FirebaseModelDownloader = FirebaseModelDownloader.getInstance()
+}
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class FirebaseBindModule {
+
+    @Binds
+    @Singleton
+    abstract fun bindFirebaseService(
+        impl: FirebaseService
+    ): IFirebaseService
 }
