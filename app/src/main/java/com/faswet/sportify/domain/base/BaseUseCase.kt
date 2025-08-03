@@ -37,8 +37,6 @@ open class BaseUseCase(private val mBaseRepository: IBaseRepository): IBaseUseCa
         return if (status.error.isNullOrBlank())
             Status.Error(error = "")
         else
-            Status.ServerError(
-                error = status.error
-            )
+            Status.ServerError(error = status.error)
     }
 }

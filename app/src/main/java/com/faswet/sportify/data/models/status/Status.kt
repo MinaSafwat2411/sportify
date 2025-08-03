@@ -8,7 +8,7 @@ sealed class Status<T>(
 ) {
 
     class Success<T>(data: T?, error: String? = null) : Status<T>(StatusCode.SUCCESS, data, error)
-    class Error<T>(data: T? = null, error: String?,errorCode: Int = 0) : Status<T>(StatusCode.ERROR, data, error,errorCode)
+    class Error<T>(data: T? = null, error: String?) : Status<T>(StatusCode.ERROR, data, error)
 
     class ServerError<T>(data: T? = null, error: String?) :
         Status<T>(StatusCode.SERVER_ERROR, data, error)
