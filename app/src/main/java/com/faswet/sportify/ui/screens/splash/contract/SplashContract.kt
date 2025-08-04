@@ -15,7 +15,7 @@ class SplashContract {
 
     sealed class Effect : ViewSideEffect {
         sealed class Navigation : Effect() {
-            data object ToHome : Navigation()
+            data object ToLayout : Navigation()
             data object ToLogin : Navigation()
             data object ToOnBoarding : Navigation()
         }

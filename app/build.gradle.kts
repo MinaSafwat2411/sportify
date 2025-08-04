@@ -8,6 +8,7 @@ plugins {
     id("com.google.firebase.appdistribution")
     id("org.jetbrains.kotlin.kapt")
     id("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -48,6 +49,9 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.13" // Match Compose version
+    }
+    kotlinOptions {
+        freeCompilerArgs = listOf("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
     }
 }
 

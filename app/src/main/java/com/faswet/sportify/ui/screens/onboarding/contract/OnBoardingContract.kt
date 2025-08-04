@@ -8,7 +8,9 @@ class OnBoardingContract {
     sealed class Event : ViewEvent {
         data object OnNextClicked : Event()
         data object OnSkipClicked : Event()
+        data class OnScreenChanged(val screen: Int) : Event()
     }
+
 
     data class State(
         val currentScreen: Int = 0,

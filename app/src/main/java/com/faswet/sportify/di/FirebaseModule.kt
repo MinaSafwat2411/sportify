@@ -1,5 +1,7 @@
-package com.faswet.sportify.firebase
+package com.faswet.sportify.di
 
+import com.faswet.sportify.firebase.FirebaseService
+import com.faswet.sportify.firebase.IFirebaseService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore

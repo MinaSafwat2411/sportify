@@ -27,11 +27,7 @@ fun SportifyCustomToken(
 ) {
     Row(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(
-                vertical = MaterialTheme.dimens.size30dp,
-                horizontal = MaterialTheme.dimens.size20dp
-            ),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

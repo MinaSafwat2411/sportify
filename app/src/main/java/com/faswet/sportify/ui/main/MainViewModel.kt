@@ -26,26 +26,12 @@ class MainViewModel @Inject constructor(
         }
     }
     override fun setInitialState() = MainContract.State(
-        shouldShowBottomNavBar = false,
-        selectedItem = NavigationScreen.BottomNavItem.Home,
         isDarkTheme = null,
         currentLanguage = "en"
     )
 
     override fun handleEvents(event: MainContract.Event) {
         when (event) {
-            is MainContract.Event.HideBottomNavigationBar -> {
-                setState { copy(shouldShowBottomNavBar = false) }
-            }
-
-            is MainContract.Event.ShowBottomNavigationBar -> {
-                setState { copy(shouldShowBottomNavBar = true) }
-            }
-
-            is MainContract.Event.NavigateItem -> {
-                setState { copy(selectedItem = event.item) }
-            }
-
             is MainContract.Event.ChangeLanguage -> {
                 saveLangToPrefs(event.langCode,event.context)
             }

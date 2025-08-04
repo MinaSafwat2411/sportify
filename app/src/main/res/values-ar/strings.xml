@@ -12,5 +12,8 @@
     <string name="onboarding_description_4">تابع أدائك من خلال تقارير تقدم أسبوعية وتكامل مع تطبيقات تتبع الصحة. سواء كنت تتابع إنجازاتك الرياضية أو لياقتك البدنية، سيوفر لك التطبيق رسومًا بيانية مفيدة لمساعدتك على التحسن.</string>
     <string name="onboarding_description_5">هل تحتاج إلى مساعدة أو لديك استفسار؟ استخدم ميزة الدردشة المباشرة للتواصل مع مشرفي النادي مباشرة. كما ستجد قسمًا للأسئلة الشائعة ونموذجًا للتواصل لأي استفسارات إضافية.</string>
     <string name="next">التالي</string>
+    <string name="get_started">فلنبدأ</string>
     <string name="skip">تخطي</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
 </resources>

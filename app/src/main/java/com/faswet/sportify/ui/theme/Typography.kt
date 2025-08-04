@@ -17,38 +17,92 @@ val interFontFamily = FontFamily(
 fun provideTypography(textColor: Color) = Typography(
     headlineLarge = TextStyle(
         fontFamily = interFontFamily,
-        fontWeight = FontWeight.Bold,
-        fontSize = 22.sp,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 34.sp,
         color = textColor
     ),
     headlineMedium = TextStyle(
         fontFamily = interFontFamily,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 20.sp,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 30.sp,
         color = textColor
     ),
     headlineSmall = TextStyle(
         fontFamily = interFontFamily,
-        fontWeight = FontWeight.Medium,
-        fontSize = 18.sp,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 28.sp,
+        color = textColor
+    ),
+    titleLarge = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 26.sp,
+        color = textColor
+    ),
+    titleMedium = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        color = textColor
+    ),
+    titleSmall = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 22.sp,
         color = textColor
     ),
     bodyLarge = TextStyle(
         fontFamily = interFontFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
+        fontSize = 20.sp,
         color = textColor
     ),
     bodyMedium = TextStyle(
         fontFamily = interFontFamily,
-        fontWeight = FontWeight.Thin,
+        fontWeight = FontWeight.Normal,
+        fontSize = 18.sp,
+        color = textColor
+    ),
+    bodySmall = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        color = textColor
+    ),
+    displayLarge = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
+        color = textColor
+    ),
+    displayMedium = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 12.sp,
+        color = textColor
+    ),
+    displaySmall = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 10.sp,
         color = textColor
     ),
     labelLarge = TextStyle(
         fontFamily = interFontFamily,
         fontWeight = FontWeight.Light,
-        fontSize = 12.sp,
+        fontSize = 8.sp,
         color = textColor
-    )
+    ),
+    labelMedium = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Light,
+        fontSize = 6.sp,
+        color = textColor
+    ),
+    labelSmall = TextStyle(
+        fontFamily = interFontFamily,
+        fontWeight = FontWeight.Light,
+        fontSize = 4.sp,
+        color = textColor
+    ),
 )

@@ -20,8 +20,8 @@ fun SplashScreenDestination(
         onEventSent = { event -> viewModel.setEvent(event) },
         onNavigationRequested = { navigationEffect ->
             when (navigationEffect) {
-                is SplashContract.Effect.Navigation.ToHome -> {
-                    navController.navigate(NavigationScreen.BottomNavItem.Home.route){
+                is SplashContract.Effect.Navigation.ToLayout -> {
+                    navController.navigate(NavigationScreen.Layout.route){
                         popUpTo(NavigationScreen.Splash.route){
                             inclusive = true
                         }

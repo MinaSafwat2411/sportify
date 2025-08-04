@@ -49,7 +49,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), IBaseBottomNavigationBar {
+class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -95,14 +95,6 @@ class MainActivity : AppCompatActivity(), IBaseBottomNavigationBar {
                 }
             }
         }
-    }
-
-    override fun showBottomNavigation() {
-        viewModel.setEvent(MainContract.Event.ShowBottomNavigationBar)
-    }
-
-    override fun hideBottomNavigation() {
-        viewModel.setEvent(MainContract.Event.HideBottomNavigationBar)
     }
 }
 

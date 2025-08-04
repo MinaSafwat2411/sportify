@@ -20,7 +20,7 @@ fun SplashScreen(
     LaunchedEffect(SIDE_EFFECTS_KEY) {
         effectFlow?.onEach { effect ->
             when (effect) {
-                is SplashContract.Effect.Navigation.ToHome -> onNavigationRequested(effect)
+                is SplashContract.Effect.Navigation.ToLayout -> onNavigationRequested(effect)
                 is SplashContract.Effect.Navigation.ToLogin -> onNavigationRequested(effect)
                 is SplashContract.Effect.Navigation.ToOnBoarding -> onNavigationRequested(effect)
             }

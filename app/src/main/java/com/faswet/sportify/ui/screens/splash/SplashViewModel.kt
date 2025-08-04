@@ -1,5 +1,6 @@
 package com.faswet.sportify.ui.screens.splash
 
+import com.faswet.sportify.domain.splash.SplashUseCase
 import com.faswet.sportify.ui.base.BaseViewModel
 import com.faswet.sportify.ui.screens.splash.contract.SplashContract
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-
+    private val splashUseCase: SplashUseCase
 ) : BaseViewModel<SplashContract.Event, SplashContract.State, SplashContract.Effect>() {
     init {
         onNavigation()
@@ -27,7 +28,11 @@ class SplashViewModel @Inject constructor(
     private fun onNavigation() {
         viewModelScope.launch {
             delay(2000)
-            setEffect { SplashContract.Effect.Navigation.ToOnBoarding }
+            if (splashUseCase.getAppIsOpened()){
+                setEffect { SplashContract.Effect.Navigation.ToLogin }
+            }else{
+                setEffect { SplashContract.Effect.Navigation.ToOnBoarding }
+            }
         }
     }
 }

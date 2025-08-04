@@ -1,13 +1,19 @@
 package com.faswet.sportify.firebase
 
+import com.faswet.sportify.data.models.FirebaseResponse
+import com.faswet.sportify.data.models.login.LoginRequest
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseUser
+
 interface IFirebaseService {
-    suspend fun loginWithEmail(email: String, password: String): Result<String>
+    suspend fun loginWithEmail(loginRequest: LoginRequest): FirebaseResponse<AuthResult?>
 
-    suspend fun registerWithEmail(email: String, password: String): Result<String>
+    suspend fun registerWithEmail(loginRequest: LoginRequest): FirebaseResponse<AuthResult?>
 
-    suspend fun sendPasswordResetEmail(email: String): Result<Unit>
+    suspend fun sendPasswordResetEmail(email: String): FirebaseResponse<Nothing>
 
-    suspend fun logout(): Result<Unit>
+    suspend fun logout(): FirebaseResponse<Nothing>
 
-    fun getCurrentUserId(): String?
+    suspend fun getCurrentUserId(): FirebaseResponse<FirebaseUser?>
 }

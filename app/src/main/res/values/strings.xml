@@ -12,5 +12,8 @@
     <string name="onboarding_description_4">Keep track of your performance with weekly progress reports and integration with health trackers. Whether you are tracking your fitness achievements or sports milestones, our app provides insightful graphs to help you improve.</string>
     <string name="onboarding_description_5">Need assistance or have a question? Use our real-time chat feature to communicate directly with club admins. You’ll also find a helpful FAQ section and contact form for any further inquiries.</string>
     <string name="next">Next</string>
+    <string name="get_started">Get Started</string>
     <string name="skip">Skip</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>

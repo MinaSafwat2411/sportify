@@ -16,7 +16,13 @@ private val DarkColorScheme = darkColorScheme(
     background = Mirage,
     surface = OxfordBlue,
     onSurface = White,
-
+    error = Red,
+    onError = White,
+    errorContainer = Red,
+    onErrorContainer = White,
+    outline = DarkGray,
+    onBackground = White,
+    onSecondary = White,
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -25,6 +31,13 @@ private val LightColorScheme = lightColorScheme(
     background = White,
     surface = White,
     onSurface = Mirage,
+    error = Red,
+    onError = White,
+    errorContainer = Red,
+    onErrorContainer = White,
+    outline = LightGray,
+    onBackground = Black,
+    onSecondary = Black
 )
 
 @Composable

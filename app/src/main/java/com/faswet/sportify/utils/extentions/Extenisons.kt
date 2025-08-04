@@ -77,7 +77,7 @@ fun <T> NavController.navigateWithResult(key: String, value: T) {
 
 fun <T> NavController.navigateToWithResult(deepLink: String, key: String, value: T) {
     navigate(deepLink) {
-        popUpTo(NavigationScreen.BottomNavItem.Home.route) {
+        popUpTo(NavigationScreen.Layout.route) {
             inclusive = true
         }
         launchSingleTop = true
@@ -106,6 +106,12 @@ fun String.toAmPmFormat(): String {
     } catch (e: Exception) {
         return  ""
     }
+}
+
+fun String.alternate(): String {
+    return this.mapIndexed { index, char ->
+        if (index % 2 == 0) char.uppercaseChar() else char.lowercaseChar()
+    }.joinToString("")
 }
 
 fun Double.toTwoDecimalString(): String {

@@ -21,6 +21,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.faswet.sportify.R
+import com.faswet.sportify.ui.screens.login.LoginScreenDestination
 import com.faswet.sportify.ui.screens.onboarding.OnBoardingDestination
 import com.faswet.sportify.ui.screens.splash.SplashScreenDestination
 import com.faswet.sportify.utils.activity.findActivity
@@ -35,13 +36,6 @@ fun AppNavHost(
 ) {
 
     val context = LocalContext.current
-    var shouldShowBottomNavigationBar by rememberSaveable {
-        mutableStateOf(false)
-    }
-
-    var isHomeResponseFinished by rememberSaveable {
-        mutableStateOf(true)
-    }
     NavHost(
         modifier = modifier
             .padding(
@@ -59,7 +53,7 @@ fun AppNavHost(
             OnBoardingDestination(navController = navController)
         }
         composable(NavigationScreen.Login.route) {
-
+            LoginScreenDestination(navController = navController)
         }
         composable(NavigationScreen.PinAccess.route) {
 
@@ -98,24 +92,9 @@ fun AppNavHost(
     }
 }
 
-@Composable
-private fun ShouldShowNavigationBottomBar(route: String) {
-    val activity = LocalContext.current.findActivity() as? MainActivity
-    when (route) {
-        NavigationScreen.Splash.route,
-        NavigationScreen.OnBoarding.route,
-        NavigationScreen.Login.route,
-        NavigationScreen.PinAccess.route,
-        NavigationScreen.Signup.route,
-
-            -> activity?.hideBottomNavigation()
-
-        else -> activity?.showBottomNavigation()
-    }
-}
 
 enum class Screen {
-    SPLASH, ON_BOARDING, LOGIN, PIN_ACCESS, SIGN_UP
+    SPLASH, ON_BOARDING, LOGIN, PIN_ACCESS, SIGN_UP, LAYOUT
 }
 
 sealed class NavigationScreen(val route: String) {
@@ -125,9 +104,6 @@ sealed class NavigationScreen(val route: String) {
     data object PinAccess : NavigationScreen(Screen.PIN_ACCESS.name)
     data object Signup : NavigationScreen(Screen.SIGN_UP.name)
 
+    data object Layout : NavigationScreen(Screen.LAYOUT.name)
 
-    sealed class BottomNavItem(val route: String, @DrawableRes val icon: Int) {
-        data object Home : BottomNavItem("home", R.drawable.ic_android)
-
-    }
 }

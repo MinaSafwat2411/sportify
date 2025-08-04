@@ -9,6 +9,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.faswet.sportify.utils.constants.Constants.SharedPreference.SHARED_PREF_NAME
 import androidx.core.content.edit
+import com.google.firebase.auth.FirebaseUser
 
 class PreferencesDataSource(private  val context: Context, private val mGson: Gson): IPreferencesDataSource {
     private val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
@@ -64,5 +65,23 @@ class PreferencesDataSource(private  val context: Context, private val mGson: Gs
 
     override fun setLang(value: String) {
         setString(Constants.SharedPreference.LANGUAGE, value)
+    }
+
+    override fun getAppIsOpened(): Boolean {
+        return getBoolean(Constants.SharedPreference.APP_IS_OPENED, false)
+    }
+
+    override fun setAppIsOpened(value: Boolean) {
+        setBoolean(Constants.SharedPreference.APP_IS_OPENED, value)
+    }
+
+    override fun getUser(): FirebaseUser {
+        val userString = getString(Constants.SharedPreference.USER, "")
+        return mGson.fromJson(userString, FirebaseUser::class.java)
+    }
+
+    override fun setUser(user: FirebaseUser) {
+        val userString = mGson.toJson(user)
+        setString(Constants.SharedPreference.USER, userString)
     }
 }
