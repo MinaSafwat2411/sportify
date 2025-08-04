@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">sportify</string>
     <string name="switch_language">Switch Language</string>
+    <string name="onboarding_title_1">Get Started with Easy Authentication</string>
+    <string name="onboarding_title_2">Book Your Favorite Sports Court</string>
+    <string name="onboarding_title_3">Stay Updated with Events &amp; Tournaments</string>
+    <string name="onboarding_title_4">Track Your Progress and Achievements</string>
+    <string name="onboarding_title_5">Communicate with Support Anytime</string>
+    <string name="onboarding_description_1">Sign up or log in using your Google, Facebook, or Email account. Whether you are a member or an admin, you will have tailored access to the features you need. Manage your profile, track your membership status, favorite sports, and activity history.</string>
+    <string name="onboarding_description_2">Check court availability with our intuitive calendar, and reserve your favorite slots for tennis, football, swimming, and more. Payment integration ensures a seamless booking experience, so you can focus on enjoying your game.</string>
+    <string name="onboarding_description_3">Discover upcoming sports events and tournaments with ease. Register for events, make payments, and receive instant notifications about event changes. Stay on top of the action and never miss a chance to compete!</string>
+    <string name="onboarding_description_4">Keep track of your performance with weekly progress reports and integration with health trackers. Whether you are tracking your fitness achievements or sports milestones, our app provides insightful graphs to help you improve.</string>
+    <string name="onboarding_description_5">Need assistance or have a question? Use our real-time chat feature to communicate directly with club admins. You’ll also find a helpful FAQ section and contact form for any further inquiries.</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
 </resources>

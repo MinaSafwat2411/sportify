@@ -20,8 +20,8 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Mirage,
-    onPrimary = White,
+    primary = White,
+    onPrimary = Mirage,
     background = White,
     surface = White,
     onSurface = Mirage,
@@ -52,3 +52,6 @@ fun SportifyTheme(
         content = content
     )
 }
+
+val MaterialTheme.dimens: Dimens
+    get() = Dimens()

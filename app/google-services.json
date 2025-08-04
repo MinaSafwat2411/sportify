@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "288993934101",
+    "firebase_url": "https://sportify-b1705-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "sportify-b1705",
     "storage_bucket": "sportify-b1705.firebasestorage.app"
   },

@@ -1,4 +1,16 @@
 <resources>
-    <string name="app_name">sportify</string>
+    <string name="app_name">سبورتيفاي</string>
     <string name="switch_language">اختر اللغة</string>
+    <string name="onboarding_title_1">ابدأ بسهولة مع تسجيل دخول بسيط</string>
+    <string name="onboarding_title_2">احجز ملعبك الرياضي المفضل</string>
+    <string name="onboarding_title_3">ابقَ على اطلاع بالأحداث والبطولات</string>
+    <string name="onboarding_title_4">تابع تقدمك وإنجازاتك</string>
+    <string name="onboarding_title_5">تواصل مع الدعم في أي وقت</string>
+    <string name="onboarding_description_1">سجّل الدخول أو أنشئ حسابًا باستخدام Google أو Facebook أو بريدك الإلكتروني. سواء كنت عضوًا أو مشرفًا، ستحصل على وصول مخصص إلى الميزات التي تحتاجها. يمكنك إدارة ملفك الشخصي، تتبع حالة عضويتك، رياضاتك المفضلة، وسجل نشاطك.</string>
+    <string name="onboarding_description_2">تحقق من توفر الملاعب من خلال تقويم سهل الاستخدام، واحجز المواعيد المفضلة لديك للعب التنس أو كرة القدم أو السباحة والمزيد. التكامل مع بوابات الدفع يضمن تجربة حجز سلسة حتى تتمكن من التركيز على الاستمتاع بلعبتك.</string>
+    <string name="onboarding_description_3">اكتشف الأحداث الرياضية والبطولات القادمة بكل سهولة. قم بالتسجيل، وسدّد الرسوم، واحصل على إشعارات فورية حول أي تغييرات. كن على اطلاع دائم ولا تفوّت فرصة المنافسة!</string>
+    <string name="onboarding_description_4">تابع أدائك من خلال تقارير تقدم أسبوعية وتكامل مع تطبيقات تتبع الصحة. سواء كنت تتابع إنجازاتك الرياضية أو لياقتك البدنية، سيوفر لك التطبيق رسومًا بيانية مفيدة لمساعدتك على التحسن.</string>
+    <string name="onboarding_description_5">هل تحتاج إلى مساعدة أو لديك استفسار؟ استخدم ميزة الدردشة المباشرة للتواصل مع مشرفي النادي مباشرة. كما ستجد قسمًا للأسئلة الشائعة ونموذجًا للتواصل لأي استفسارات إضافية.</string>
+    <string name="next">التالي</string>
+    <string name="skip">تخطي</string>
 </resources>

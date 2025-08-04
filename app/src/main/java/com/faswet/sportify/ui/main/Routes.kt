@@ -4,12 +4,12 @@ import android.os.Bundle
 import androidx.activity.compose.BackHandler
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,6 +21,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.faswet.sportify.R
+import com.faswet.sportify.ui.screens.onboarding.OnBoardingDestination
+import com.faswet.sportify.ui.screens.splash.SplashScreenDestination
 import com.faswet.sportify.utils.activity.findActivity
 
 
@@ -40,43 +42,50 @@ fun AppNavHost(
     var isHomeResponseFinished by rememberSaveable {
         mutableStateOf(true)
     }
-    Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
-        contentWindowInsets = WindowInsets.ime, modifier = Modifier
-            .windowInsetsPadding(WindowInsets.safeDrawing),
-        bottomBar = {
-        }) { padding ->
-        NavHost(
-            modifier = modifier.padding(padding),
-            navController = navController,
-            startDestination = startDestination
-        ) {
-            composable(NavigationScreen.Splash.route) {
-                ThemeAndLanguageControls(viewModel)
-            }
-            composable(NavigationScreen.OnBoarding.route) {
+    NavHost(
+        modifier = modifier
+            .padding(
+                bottom = WindowInsets.ime.asPaddingValues().calculateBottomPadding()
+            )
+            .windowInsetsPadding(WindowInsets.safeDrawing)
+            .fillMaxSize(),
+        navController = navController,
+        startDestination = startDestination
+    ) {
+        composable(NavigationScreen.Splash.route) {
+            SplashScreenDestination(navController = navController)
+        }
+        composable(NavigationScreen.OnBoarding.route) {
+            OnBoardingDestination(navController = navController)
+        }
+        composable(NavigationScreen.Login.route) {
 
-            }
-            composable(NavigationScreen.ChooseWay.route) {
+        }
+        composable(NavigationScreen.PinAccess.route) {
 
-            }
-            composable(NavigationScreen.Login.route) {
-
-            }
-            composable(NavigationScreen.PinAccess.route) {
-
-            }
-
-            composable(NavigationScreen.Signup.route) {
-
-            }
+        }
+        composable(NavigationScreen.Signup.route) {
 
         }
 
     }
-
     BackHandler {
         val currentRoute = navController.currentBackStackEntry?.destination?.route
+        if (currentRoute != null) {
+            when (currentRoute) {
+                NavigationScreen.Splash.route,
+                NavigationScreen.OnBoarding.route,
+                NavigationScreen.Login.route,
+                NavigationScreen.Signup.route,
+                    -> {
+                    context.findActivity()?.finish()
+                }
+
+                else -> {
+                    navController.popBackStack()
+                }
+            }
+        }
     }
 
     fun replaceRouteArguments(route: String, arguments: Bundle): String {
@@ -88,13 +97,13 @@ fun AppNavHost(
         return resolvedRoute
     }
 }
+
 @Composable
 private fun ShouldShowNavigationBottomBar(route: String) {
     val activity = LocalContext.current.findActivity() as? MainActivity
     when (route) {
         NavigationScreen.Splash.route,
         NavigationScreen.OnBoarding.route,
-        NavigationScreen.ChooseWay.route,
         NavigationScreen.Login.route,
         NavigationScreen.PinAccess.route,
         NavigationScreen.Signup.route,
@@ -106,21 +115,19 @@ private fun ShouldShowNavigationBottomBar(route: String) {
 }
 
 enum class Screen {
-    SPLASH, ON_BOARDING, CHOOSE_WAY, LOGIN, PIN_ACCESS, SIGN_UP
+    SPLASH, ON_BOARDING, LOGIN, PIN_ACCESS, SIGN_UP
 }
 
 sealed class NavigationScreen(val route: String) {
     data object Splash : NavigationScreen(Screen.SPLASH.name)
     data object OnBoarding : NavigationScreen(Screen.ON_BOARDING.name)
-    data object ChooseWay : NavigationScreen(Screen.CHOOSE_WAY.name)
     data object Login : NavigationScreen(Screen.LOGIN.name)
     data object PinAccess : NavigationScreen(Screen.PIN_ACCESS.name)
-    data object Signup: NavigationScreen(Screen.SIGN_UP.name)
-
+    data object Signup : NavigationScreen(Screen.SIGN_UP.name)
 
 
     sealed class BottomNavItem(val route: String, @DrawableRes val icon: Int) {
-        data object Home : BottomNavItem("home", R.drawable.ic_home)
+        data object Home : BottomNavItem("home", R.drawable.ic_android)
 
     }
 }
