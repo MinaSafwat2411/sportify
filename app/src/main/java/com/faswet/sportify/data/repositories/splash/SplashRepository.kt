@@ -6,6 +6,7 @@ import com.faswet.sportify.data.repositories.base.BaseRepository
 import com.faswet.sportify.data.sharedprefrences.IPreferencesDataSource
 import com.faswet.sportify.di.IoDispatcher
 import com.faswet.sportify.utils.connection.IConnectionUtils
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
@@ -21,4 +22,9 @@ class SplashRepository @Inject constructor(
     override fun getAppIsOpened(): Boolean {
         return mIPreferencesDataSource.getAppIsOpened()
     }
+
+    override fun getUserUID(): String? {
+        return mIPreferencesDataSource.getUserUID()
+    }
+
 }

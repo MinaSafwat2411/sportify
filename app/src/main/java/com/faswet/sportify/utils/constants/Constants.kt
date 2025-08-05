@@ -9,6 +9,7 @@ object Constants {
 
         const val APP_IS_OPENED = "app_is_opened"
 
+        const val USER_UID = "user_uid"
         const val USER = "user"
     }
 

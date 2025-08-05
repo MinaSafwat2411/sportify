@@ -11,6 +11,6 @@ interface IPreferencesDataSource {
     fun  setAppIsOpened(value: Boolean)
     fun  getAppIsOpened(): Boolean
 
-    fun setUser(user: FirebaseUser)
-    fun getUser(): FirebaseUser
+    fun setUserUID(user: FirebaseUser)
+    fun getUserUID(): String
 }

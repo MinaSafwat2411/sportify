@@ -2,25 +2,13 @@ package com.faswet.sportify.ui.main
 
 import android.os.Bundle
 import androidx.activity.compose.BackHandler
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.ime
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.faswet.sportify.R
 import com.faswet.sportify.ui.screens.login.LoginScreenDestination
 import com.faswet.sportify.ui.screens.onboarding.OnBoardingDestination
 import com.faswet.sportify.ui.screens.splash.SplashScreenDestination
@@ -38,10 +26,6 @@ fun AppNavHost(
     val context = LocalContext.current
     NavHost(
         modifier = modifier
-            .padding(
-                bottom = WindowInsets.ime.asPaddingValues().calculateBottomPadding()
-            )
-            .windowInsetsPadding(WindowInsets.safeDrawing)
             .fillMaxSize(),
         navController = navController,
         startDestination = startDestination
@@ -61,6 +45,9 @@ fun AppNavHost(
         composable(NavigationScreen.Signup.route) {
 
         }
+        composable(NavigationScreen.Layout.route) {
+
+        }
 
     }
     BackHandler {
@@ -71,6 +58,7 @@ fun AppNavHost(
                 NavigationScreen.OnBoarding.route,
                 NavigationScreen.Login.route,
                 NavigationScreen.Signup.route,
+                NavigationScreen.Layout.route,
                     -> {
                     context.findActivity()?.finish()
                 }

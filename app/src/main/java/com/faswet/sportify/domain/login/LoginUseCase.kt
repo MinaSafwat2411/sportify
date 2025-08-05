@@ -17,7 +17,7 @@ class LoginUseCase @Inject constructor(
         return mLoginRepository.login(loginRequest)
     }
 
-    override fun setUser(user: FirebaseUser) {
-        mLoginRepository.setUser(user)
+    override fun setUserUID(user: FirebaseUser) {
+        mLoginRepository.setUserUID(user)
     }
 }

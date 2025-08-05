@@ -25,7 +25,8 @@ class FirebaseService @Inject constructor(
 
     override suspend fun loginWithEmail(loginRequest: LoginRequest): FirebaseResponse<AuthResult?> {
         return suspendCancellableCoroutine { continuation ->
-            val task = firebaseAuth.signInWithEmailAndPassword(loginRequest.email, loginRequest.password)
+            val task =
+                firebaseAuth.signInWithEmailAndPassword(loginRequest.email, loginRequest.password)
             task.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val result = task.result
@@ -46,15 +47,6 @@ class FirebaseService @Inject constructor(
                         )
                     )
                 }
-            }
-            task.addOnFailureListener { exception ->
-                continuation.resume(
-                    FirebaseResponse(
-                        status = false,
-                        data = null,
-                        message = exception.message ?: "Unknown error",
-                    )
-                )
             }
         }
     }
@@ -64,7 +56,10 @@ class FirebaseService @Inject constructor(
     ): FirebaseResponse<AuthResult?> {
         return suspendCancellableCoroutine { continuation ->
             val task =
-                firebaseAuth.createUserWithEmailAndPassword(loginRequest.email, loginRequest.password)
+                firebaseAuth.createUserWithEmailAndPassword(
+                    loginRequest.email,
+                    loginRequest.password
+                )
             task.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val result = task.result
@@ -91,18 +86,6 @@ class FirebaseService @Inject constructor(
                         }
                     )
                 }
-            }
-            task.addOnFailureListener { exception ->
-                continuation.resume(
-                    FirebaseResponse(
-                        status = false,
-                        data = null,
-                        message = exception.message ?: "Unknown error",
-                    ),
-                    onCancellation = {
-                        continuation.cancel()
-                    }
-                )
             }
         }
     }

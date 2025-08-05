@@ -17,6 +17,7 @@
             android:name=".ui.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.Sportify"
             tools:ignore="RedundantLabel">
             <intent-filter>

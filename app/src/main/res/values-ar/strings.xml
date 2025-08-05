@@ -16,4 +16,16 @@
     <string name="skip">تخطي</string>
     <string name="email">البريد الإلكتروني</string>
     <string name="password">كلمة المرور</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="forgot_password">نسيت كلمة المرور؟</string>
+    <string name="sign_up">إنشاء حساب</string>
+    <string name="don_t_have_an_account">ليس لديك حساب؟</string>
+    <string name="already_have_an_account">هل لديك حساب بالفعل؟</string>
+    <string name="google">جوجل</string>
+    <string name="facebook">فيسبوك</string>
+    <string name="email_is_required">البريد الإلكتروني مطلوب</string>
+    <string name="password_is_required">كلمة المرور مطلوبة</string>
+    <string name="empty"> </string>
+    <string name="invalid_email">بريد إلكتروني غير صالح</string>
+    <string name="invalid_password">كلمة مرور غير صالحة</string>
 </resources>

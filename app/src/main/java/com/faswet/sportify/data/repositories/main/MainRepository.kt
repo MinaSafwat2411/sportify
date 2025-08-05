@@ -19,7 +19,7 @@ class MainRepository @Inject constructor(
 ) : BaseRepository(connectionUtils, mIRemoteDataSource, mIPreferencesDataSource,dispatcher),
     IMainRepository {
     override fun getIsDark(): Boolean {
-        return mIPreferencesDataSource.getIsDark()
+        return !mIPreferencesDataSource.getIsDark()
     }
 
     override fun getLang(): String {

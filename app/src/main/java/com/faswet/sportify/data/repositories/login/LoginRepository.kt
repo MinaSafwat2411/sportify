@@ -30,7 +30,7 @@ class LoginRepository @Inject constructor(
         }
     }
 
-    override fun setUser(user: FirebaseUser) {
-        mPreferencesDataSource.setUser(user)
+    override fun setUserUID(user: FirebaseUser) {
+        mPreferencesDataSource.setUserUID(user)
     }
 }

@@ -29,9 +29,16 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             delay(2000)
             if (splashUseCase.getAppIsOpened()){
-                setEffect { SplashContract.Effect.Navigation.ToLogin }
+                if (splashUseCase.getUserUID().isNullOrEmpty().not()){
+                    setEffect { SplashContract.Effect.Navigation.ToLayout }
+                    return@launch
+                }else{
+                    setEffect { SplashContract.Effect.Navigation.ToLogin }
+                    return@launch
+                }
             }else{
                 setEffect { SplashContract.Effect.Navigation.ToOnBoarding }
+                return@launch
             }
         }
     }

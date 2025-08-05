@@ -2,7 +2,6 @@ package com.faswet.sportify.data.sharedprefrences
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import com.faswet.sportify.utils.constants.Constants
 import com.google.gson.Gson
 import androidx.security.crypto.EncryptedSharedPreferences
@@ -75,13 +74,11 @@ class PreferencesDataSource(private  val context: Context, private val mGson: Gs
         setBoolean(Constants.SharedPreference.APP_IS_OPENED, value)
     }
 
-    override fun getUser(): FirebaseUser {
-        val userString = getString(Constants.SharedPreference.USER, "")
-        return mGson.fromJson(userString, FirebaseUser::class.java)
+    override fun getUserUID(): String {
+        return getString(Constants.SharedPreference.USER_UID, "") ?: ""
     }
 
-    override fun setUser(user: FirebaseUser) {
-        val userString = mGson.toJson(user)
-        setString(Constants.SharedPreference.USER, userString)
+    override fun setUserUID(user: FirebaseUser) {
+        setString(Constants.SharedPreference.USER_UID, user.uid)
     }
 }

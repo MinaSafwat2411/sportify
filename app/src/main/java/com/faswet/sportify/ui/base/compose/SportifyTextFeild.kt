@@ -3,6 +3,7 @@ package com.faswet.sportify.ui.base.compose
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -50,7 +51,7 @@ fun SportifyTextField(
     trailingIcon: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     suffixIcon: @Composable (() -> Unit)? = null,
-    prefixIcon: @Composable (() -> Unit)? = null
+    prefixIcon: @Composable (() -> Unit)? = null,
 ) {
 
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
@@ -100,7 +101,7 @@ fun SportifyTextField(
             placeholder = {
                 Text(
                     text = placeholder ?: Constants.General.EMPTY_TEXT,
-                    style = MaterialTheme.typography.bodyMedium.copy(
+                    style = MaterialTheme.typography.displayLarge.copy(
                         color = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimary
                     )
                 )
@@ -132,14 +133,16 @@ fun SportifyTextField(
             prefix = prefixIcon,
             visualTransformation = if (type == FieldType.Password && !passwordVisible) PasswordVisualTransformation() else VisualTransformation.None,
         )
-
-        if (isError)Text(
-            text = onErrorText?: Constants.General.EMPTY_TEXT,
-            style = MaterialTheme.typography.displayLarge.copy(
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.error
-            ),
-            textAlign = labelTextAlign,
-        )
+        if (isError){
+            Spacer(modifier = Modifier.height(MaterialTheme.dimens.size4dp))
+            Text(
+                text = onErrorText?: Constants.General.EMPTY_TEXT,
+                style = MaterialTheme.typography.displayLarge.copy(
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.error
+                ),
+                textAlign = labelTextAlign,
+            )
+        }
     }
 }
