@@ -2,6 +2,8 @@ package com.faswet.sportify.firebase
 
 import com.faswet.sportify.data.models.FirebaseResponse
 import com.faswet.sportify.data.models.login.LoginRequest
+import com.faswet.sportify.data.models.user.UserModel
+import com.faswet.sportify.utils.constants.Constants
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -168,4 +170,46 @@ class FirebaseService @Inject constructor(
 
         }
     }
+
+    override suspend fun getUserData(): FirebaseResponse<UserModel?> {
+        return suspendCancellableCoroutine { continuation ->
+            val currentUser = firebaseAuth.currentUser
+            if (currentUser == null) {
+                continuation.resume(
+                    FirebaseResponse(
+                        status = false,
+                        data = null,
+                        message = "User not authenticated"
+                    ),
+                    onCancellation = { continuation.cancel() }
+                )
+                return@suspendCancellableCoroutine
+            }
+
+            firestore.collection(Constants.FirebaseFields.users).document(currentUser.uid).get()
+                .addOnSuccessListener { document ->
+                    val user = document.toObject(UserModel::class.java)
+                    if (user != null) {
+                        continuation.resume(
+                            FirebaseResponse(
+                                status = true,
+                                data = user,
+                                message = "Success"
+                            ),
+                            onCancellation = { continuation.cancel() }
+                        )
+                    } else {
+                        continuation.resume(
+                            FirebaseResponse(
+                                status = false,
+                                data = null,
+                                message = "User data not found"
+                            ),
+                            onCancellation = { continuation.cancel() }
+                        )
+                    }
+                }
+        }
+    }
+
 }

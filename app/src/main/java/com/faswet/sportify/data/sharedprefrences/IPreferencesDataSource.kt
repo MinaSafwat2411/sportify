@@ -1,5 +1,6 @@
 package com.faswet.sportify.data.sharedprefrences
 
+import com.faswet.sportify.data.models.user.UserModel
 import com.google.firebase.auth.FirebaseUser
 
 interface IPreferencesDataSource {
@@ -13,4 +14,7 @@ interface IPreferencesDataSource {
 
     fun setUserUID(user: FirebaseUser)
     fun getUserUID(): String
+
+    fun setUserData(user: UserModel)
+    fun getUserData(): UserModel?
 }

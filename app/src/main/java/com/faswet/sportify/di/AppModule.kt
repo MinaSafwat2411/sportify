@@ -1,6 +1,8 @@
 package com.faswet.sportify.di
 
 import android.content.Context
+import com.faswet.sportify.data.drive.GoogleDriveUploader
+import com.faswet.sportify.data.drive.IGoogleDriveUploader
 import com.faswet.sportify.data.local.ILocalDataSource
 import com.faswet.sportify.data.local.LocalDataSource
 import com.faswet.sportify.data.remote.IRemoteDataSource
@@ -48,7 +50,7 @@ internal class AppModule {
         @ApplicationContext context: Context,
         gson: Gson
     ): IPreferencesDataSource {
-        return PreferencesDataSource(context, gson)
+        return PreferencesDataSource(context)
     }
 
     @Provides
@@ -63,6 +65,14 @@ internal class AppModule {
     fun provideMainDispatcher(
     ): CoroutineDispatcher {
         return Dispatchers.Main
+    }
+
+    @Provides
+    @Singleton
+    fun provideGoogleDriveUploader(
+        @ApplicationContext context: Context
+    ): IGoogleDriveUploader {
+        return GoogleDriveUploader(context)
     }
 
 }

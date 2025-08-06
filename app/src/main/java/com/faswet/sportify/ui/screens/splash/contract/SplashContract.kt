@@ -11,6 +11,7 @@ class SplashContract {
 
     data class State(
         val isLoading: Boolean = false,
+        val errorMessage: String? = null,
     ): ViewState
 
     sealed class Effect : ViewSideEffect {

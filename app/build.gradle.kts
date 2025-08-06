@@ -46,6 +46,13 @@ android {
     buildFeatures {
         compose = true
     }
+    packaging {
+        resources {
+            excludes += "META-INF/DEPENDENCIES"
+            excludes += "META-INF/INDEX.LIST"
+        }
+    }
+
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.13" // Match Compose version
@@ -135,4 +142,15 @@ dependencies {
 
     implementation(libs.androidx.security.crypto)
     implementation(libs.accompanist.systemuicontroller)
+
+    // Google Drive API
+    implementation(libs.google.api.client.android)
+    implementation(libs.google.api.client.gson)
+    implementation(libs.google.http.client.android)
+    implementation(libs.google.http.client.gson)
+
+    // Google Drive v3 (generated API client)
+    implementation(libs.google.api.services.drive.vv3rev1971250)
+    // Google Sign-In (for OAuth2)
+    implementation(libs.play.services.auth)
 }

@@ -3,6 +3,7 @@ package com.faswet.sportify.domain.login
 import com.faswet.sportify.data.models.FirebaseResponse
 import com.faswet.sportify.data.models.login.LoginRequest
 import com.faswet.sportify.data.models.status.Status
+import com.faswet.sportify.data.models.user.UserModel
 import com.faswet.sportify.data.repositories.login.ILoginRepository
 import com.faswet.sportify.domain.base.BaseUseCase
 import com.google.firebase.auth.AuthResult
@@ -19,5 +20,13 @@ class LoginUseCase @Inject constructor(
 
     override fun setUserUID(user: FirebaseUser) {
         mLoginRepository.setUserUID(user)
+    }
+
+    override fun getUserData(): Flow<Status<FirebaseResponse<UserModel?>>> {
+        return mLoginRepository.getUserData()
+    }
+
+    override fun setUserData(user: UserModel) {
+        mLoginRepository.setUserData(user)
     }
 }

@@ -11,6 +11,7 @@ object Constants {
 
         const val USER_UID = "user_uid"
         const val USER = "user"
+        const val USER_DATA = "user_data"
     }
 
     object General {
@@ -37,7 +38,7 @@ object Constants {
     }
 
     object FirebaseFields{
-
+        const val users = "Users"
     }
 
     object FirebaseQuery{

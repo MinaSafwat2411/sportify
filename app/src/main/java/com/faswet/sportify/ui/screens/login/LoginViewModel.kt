@@ -3,6 +3,7 @@ package com.faswet.sportify.ui.screens.login
 import android.util.Patterns
 import com.faswet.sportify.R
 import com.faswet.sportify.data.models.login.LoginRequest
+import com.faswet.sportify.data.models.user.UserModel
 import com.faswet.sportify.di.MainDispatcher
 import com.faswet.sportify.domain.login.ILoginUseCase
 import com.faswet.sportify.ui.base.BaseViewModel
@@ -86,7 +87,7 @@ class LoginViewModel @Inject constructor(
             }.collect { result ->
                 if (result.data?.status == true) {
                     loginUseCase.setUserUID(result.data.data?.user as FirebaseUser)
-                    setEffect { LoginContract.Effect.Navigation.ToLayout }
+                    getUserData()
                 }else{
                     setState { copy(errorMessage = result.data?.message) }
                 }
@@ -95,5 +96,31 @@ class LoginViewModel @Inject constructor(
     }
     fun isValidEmail(email: String): Boolean {
         return email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun getUserData(){
+        val handler = CoroutineExceptionHandler { _, exception ->
+            viewModelScope.launch {
+                setState { copy(isLoading = false) }
+                exception.printStackTrace()
+            }
+        }
+        viewModelScope.launch(mainDispatcher + handler) {
+            loginUseCase.getUserData().onStart {
+                setState { copy(isLoading = true) }
+            }.onCompletion {
+                setState { copy(isLoading = false) }
+            }.catch {
+                setState { copy(errorMessage = it.message) }
+            }.collect {status ->
+                if (status.data?.status == true){
+                    loginUseCase.setUserData(status.data.data?: UserModel())
+                    setEffect { LoginContract.Effect.Navigation.ToLayout }
+                    return@collect
+                }else{
+                    return@collect
+                }
+            }
+        }
     }
 }

@@ -27,11 +27,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -52,7 +49,6 @@ fun LoginContent(
     state: LoginContract.State,
     onEventSent: (event: LoginContract.Event) -> Unit,
 ) {
-    val scrollState = rememberScrollState()
     val snackBarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     LaunchedEffect(key1 = state.errorMessage) {
@@ -150,7 +146,7 @@ fun LoginContent(
                             ) {
                                 Text(
                                     text = stringResource(R.string.forgot_password),
-                                    style = MaterialTheme.typography.displayLarge.copy(
+                                    style = MaterialTheme.typography.titleSmall.copy(
                                         color = MaterialTheme.colorScheme.onPrimary
                                     ),
                                     textAlign = TextAlign.End,
@@ -174,7 +170,7 @@ fun LoginContent(
                         )
                         Text(
                             text = stringResource(R.string.don_t_have_an_account) + " "+ stringResource(R.string.sign_up),
-                            style = MaterialTheme.typography.displayLarge.copy(
+                            style = MaterialTheme.typography.titleSmall.copy(
                                 color = MaterialTheme.colorScheme.onPrimary
                             ),
                             textAlign = TextAlign.Center,

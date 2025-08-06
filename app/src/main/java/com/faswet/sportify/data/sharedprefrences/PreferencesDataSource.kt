@@ -8,9 +8,15 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.faswet.sportify.utils.constants.Constants.SharedPreference.SHARED_PREF_NAME
 import androidx.core.content.edit
+import com.faswet.sportify.data.models.user.UserModel
 import com.google.firebase.auth.FirebaseUser
+import com.google.gson.GsonBuilder
 
-class PreferencesDataSource(private  val context: Context, private val mGson: Gson): IPreferencesDataSource {
+class PreferencesDataSource(private  val context: Context): IPreferencesDataSource {
+
+    private val mGson: Gson = GsonBuilder()
+        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        .create()
     private val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
     private val mPrefs = EncryptedSharedPreferences.create(
         SHARED_PREF_NAME,
@@ -80,5 +86,19 @@ class PreferencesDataSource(private  val context: Context, private val mGson: Gs
 
     override fun setUserUID(user: FirebaseUser) {
         setString(Constants.SharedPreference.USER_UID, user.uid)
+    }
+
+    override fun setUserData(user: UserModel) {
+        val json = mGson.toJson(user)
+        mPrefs.edit(commit = true) {
+            putString(Constants.SharedPreference.USER_DATA, json)
+        }
+    }
+
+    override fun getUserData(): UserModel? {
+        val json = mPrefs.getString(Constants.SharedPreference.USER_DATA, null)
+        return json?.let {
+            mGson.fromJson(it, UserModel::class.java)
+        }
     }
 }

@@ -7,6 +7,7 @@ import com.faswet.sportify.data.repositories.splash.SplashRepository
 import com.faswet.sportify.data.sharedprefrences.IPreferencesDataSource
 import com.faswet.sportify.domain.splash.ISplashUseCase
 import com.faswet.sportify.domain.splash.SplashUseCase
+import com.faswet.sportify.firebase.IFirebaseService
 import com.faswet.sportify.utils.connection.IConnectionUtils
 import dagger.Binds
 import dagger.Module
@@ -23,12 +24,14 @@ abstract class SplashModule {
         @Singleton
         @Provides
         fun provideSplashRepository(
+            mFirebaseService: IFirebaseService,
             connectionUtils: IConnectionUtils,
             mIRemoteDataSource: IRemoteDataSource,
             mILocalDataSource: ILocalDataSource,
             mIPreferencesDataSource: IPreferencesDataSource,
         ): ISplashRepository {
             return SplashRepository(
+                mFirebaseService,
                 connectionUtils,
                 mIRemoteDataSource,
                 mILocalDataSource,

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".SportifyApplication"
         android:allowBackup="true"
@@ -29,6 +31,9 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713"/>
+        <meta-data
+            android:name="com.google.android.gms.client_id"
+            android:value="288993934101-hll6tdl1dqd39ggr8ccncrui5ufani04.apps.googleusercontent.com" />
     </application>
 
 </manifest>

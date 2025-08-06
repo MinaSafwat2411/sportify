@@ -28,4 +28,12 @@
     <string name="empty"> </string>
     <string name="invalid_email">بريد إلكتروني غير صالح</string>
     <string name="invalid_password">كلمة مرور غير صالحة</string>
+    <string name="home">الرئيسية</string>
+    <string name="favorite">المفضلة</string>
+    <string name="booking">الحجوزات</string>
+    <string name="event">الفعاليات</string>
+    <string name="search">بحث</string>
+    <string name="settings">الإعدادات</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="logout">تسجيل الخروج</string>
 </resources>

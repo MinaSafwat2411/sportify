@@ -9,6 +9,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.faswet.sportify.ui.screens.layout.LayoutDestination
 import com.faswet.sportify.ui.screens.login.LoginScreenDestination
 import com.faswet.sportify.ui.screens.onboarding.OnBoardingDestination
 import com.faswet.sportify.ui.screens.splash.SplashScreenDestination
@@ -40,13 +41,12 @@ fun AppNavHost(
             LoginScreenDestination(navController = navController)
         }
         composable(NavigationScreen.PinAccess.route) {
-
         }
         composable(NavigationScreen.Signup.route) {
 
         }
         composable(NavigationScreen.Layout.route) {
-
+            LayoutDestination(navController = navController)
         }
 
     }

@@ -69,7 +69,7 @@ fun SportifyTextField(
     ) {
         Text(
             text = label,
-            style = MaterialTheme.typography.displayLarge.copy(
+            style = MaterialTheme.typography.titleSmall.copy(
                 fontWeight = FontWeight.Bold,
                 color = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimary
             ),
@@ -101,7 +101,7 @@ fun SportifyTextField(
             placeholder = {
                 Text(
                     text = placeholder ?: Constants.General.EMPTY_TEXT,
-                    style = MaterialTheme.typography.displayLarge.copy(
+                    style = MaterialTheme.typography.bodyMedium.copy(
                         color = if (isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onPrimary
                     )
                 )

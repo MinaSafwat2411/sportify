@@ -37,7 +37,7 @@ fun SportifyCustomButton(
     ) {
         Text(
             text = text,
-            style = MaterialTheme.typography.displayMedium.copy(
+            style = MaterialTheme.typography.titleMedium.copy(
                 color = textColor
             )
         )
