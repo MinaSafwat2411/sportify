@@ -22,6 +22,10 @@ googleApiClientAndroid = "2.8.0"
 googleApiServicesDriveVersion = "v3-rev197-1.25.0"
 googleHttpClientAndroid = "1.47.1"
 googleHttpClientGson = "1.47.1"
+grpcCore = "1.74.0"
+grpcOkhttp = "1.74.0"
+grpcProtobufLite = "1.74.0"
+grpcStub = "1.74.0"
 gson = "2.13.1"
 hiltAndroid = "2.57"
 hiltNavigationCompose = "1.2.0"
@@ -83,8 +87,13 @@ firebase-storage = { module = "com.google.firebase:firebase-storage", version.re
 google-api-client-android = { module = "com.google.api-client:google-api-client-android", version.ref = "googleApiClientAndroid" }
 google-api-client-gson = { module = "com.google.api-client:google-api-client-gson", version.ref = "googleApiClientGson" }
 google-api-services-drive-vv3rev1971250 = { module = "com.google.apis:google-api-services-drive", version.ref = "googleApiServicesDriveVersion" }
+google-firebase-inappmessaging-display = { module = "com.google.firebase:firebase-inappmessaging-display" }
 google-http-client-android = { module = "com.google.http-client:google-http-client-android", version.ref = "googleHttpClientAndroid" }
 google-http-client-gson = { module = "com.google.http-client:google-http-client-gson", version.ref = "googleHttpClientGson" }
+grpc-core = { module = "io.grpc:grpc-core", version.ref = "grpcCore" }
+grpc-okhttp = { module = "io.grpc:grpc-okhttp", version.ref = "grpcOkhttp" }
+grpc-protobuf-lite = { module = "io.grpc:grpc-protobuf-lite", version.ref = "grpcProtobufLite" }
+grpc-stub = { module = "io.grpc:grpc-stub", version.ref = "grpcStub" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }

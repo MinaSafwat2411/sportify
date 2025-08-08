@@ -62,6 +62,15 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force("io.grpc:grpc-okhttp:1.74.0")
+        force("io.grpc:grpc-protobuf-lite:1.74.0")
+        force("io.grpc:grpc-stub:1.74.0")
+        force("io.grpc:grpc-core:1.74.0")
+    }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -153,4 +162,13 @@ dependencies {
     implementation(libs.google.api.services.drive.vv3rev1971250)
     // Google Sign-In (for OAuth2)
     implementation(libs.play.services.auth)
+
+    // Firebase services
+    implementation(libs.google.firebase.inappmessaging.display)
+
+    // gRPC dependencies (required manually to avoid crash)
+    implementation(libs.grpc.okhttp)
+    implementation(libs.grpc.protobuf.lite)
+    implementation(libs.grpc.stub)
+    implementation(libs.grpc.core)
 }

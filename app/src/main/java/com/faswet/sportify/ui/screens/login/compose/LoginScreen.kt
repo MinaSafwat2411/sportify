@@ -1,9 +1,13 @@
 package com.faswet.sportify.ui.screens.login.compose
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.faswet.sportify.ui.base.SIDE_EFFECTS_KEY
+import com.faswet.sportify.ui.base.compose.SportifyLoading
 import com.faswet.sportify.ui.screens.login.contract.LoginContract
 import kotlinx.coroutines.flow.Flow
 
@@ -23,9 +27,15 @@ fun LoginScreen(
         }
     }
 
-    LoginContent(
-        modifier = modifier,
-        state = state,
-        onEventSent = onEventSent
-    )
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        LoginContent(
+            modifier = modifier,
+            state = state,
+            onEventSent = onEventSent
+        )
+        if (state.isLoading) SportifyLoading()
+    }
 }

@@ -14,7 +14,7 @@ private val DarkColorScheme = darkColorScheme(
     primary = Mirage,
     onPrimary = White,
     background = Mirage,
-    surface = OxfordBlue,
+    surface = Mirage,
     onSurface = White,
     error = Red,
     onError = White,
@@ -23,6 +23,7 @@ private val DarkColorScheme = darkColorScheme(
     outline = DarkGray,
     onBackground = White,
     onSecondary = White,
+    secondary = OxfordBlue
 )
 
 private val LightColorScheme = lightColorScheme(

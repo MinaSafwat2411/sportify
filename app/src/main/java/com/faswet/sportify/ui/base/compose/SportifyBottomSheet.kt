@@ -59,9 +59,8 @@ fun SportifyBottomNavBar(
                 .fillMaxWidth()
                 .padding(MaterialTheme.dimens.size8dp)
                 .background(MaterialTheme.colorScheme.onPrimary, shape = RoundedCornerShape(MaterialTheme.dimens.size20dp))
-                .shadow(MaterialTheme.dimens.size8dp, shape = RoundedCornerShape(MaterialTheme.dimens.size20dp))
                 .clip(RoundedCornerShape(MaterialTheme.dimens.size56dp)),
-            horizontalArrangement = Arrangement.SpaceAround,
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             tabs.forEachIndexed { index, label ->
@@ -96,7 +95,7 @@ fun SportifyBottomNavBar(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = LocalIndication.current
                         )
-                        .padding(horizontal = MaterialTheme.dimens.size8dp, vertical = MaterialTheme.dimens.size8dp)
+                        .padding(horizontal = MaterialTheme.dimens.size4dp, vertical = MaterialTheme.dimens.size4dp)
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
