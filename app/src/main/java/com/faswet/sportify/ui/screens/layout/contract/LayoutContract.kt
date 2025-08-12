@@ -1,5 +1,6 @@
 package com.faswet.sportify.ui.screens.layout.contract
 
+import com.faswet.sportify.data.models.user.UserModel
 import com.faswet.sportify.ui.base.ViewEvent
 import com.faswet.sportify.ui.base.ViewSideEffect
 import com.faswet.sportify.ui.base.ViewState
@@ -16,5 +17,6 @@ class LayoutContract {
     }
     data class State(
         val currentScreen: Int = 0,
+        val userModel: UserModel? = null,
     ): ViewState
 }
