@@ -38,7 +38,8 @@ private val LightColorScheme = lightColorScheme(
     onErrorContainer = White,
     outline = LightGray,
     onBackground = Black,
-    onSecondary = Black
+    onSecondary = Black,
+    secondary = CatskillWhite
 )
 
 @Composable

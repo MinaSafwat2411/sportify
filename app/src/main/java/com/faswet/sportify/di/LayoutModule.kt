@@ -1,6 +1,6 @@
 package com.faswet.sportify.di
 
-import com.faswet.sportify.data.drive.GoogleDriveUploader
+import com.faswet.sportify.data.drive.IGoogleDriveUploader
 import com.faswet.sportify.data.local.ILocalDataSource
 import com.faswet.sportify.data.remote.IRemoteDataSource
 import com.faswet.sportify.data.repositories.layout.ILayoutRepository
@@ -8,7 +8,7 @@ import com.faswet.sportify.data.repositories.layout.LayoutRepository
 import com.faswet.sportify.data.sharedprefrences.IPreferencesDataSource
 import com.faswet.sportify.domain.layout.ILayoutUseCase
 import com.faswet.sportify.domain.layout.LayoutUseCase
-import com.faswet.sportify.firebase.FirebaseService
+import com.faswet.sportify.firebase.IFirebaseService
 import com.faswet.sportify.utils.connection.IConnectionUtils
 import dagger.Binds
 import dagger.Module
@@ -28,9 +28,9 @@ abstract class  LayoutModule {
             mIRemoteDataSource: IRemoteDataSource,
             mIPreferencesDataSource: IPreferencesDataSource,
             mILocalDataSource: ILocalDataSource,
-            mFirebaseService: FirebaseService,
-            mGoogleDriveUploader: GoogleDriveUploader
-        ): ILayoutRepository {
+            mFirebaseService: IFirebaseService,
+            mGoogleDriveUploader: IGoogleDriveUploader,
+            ): ILayoutRepository {
             return LayoutRepository(
                 mILocalDataSource,
                 mIRemoteDataSource,

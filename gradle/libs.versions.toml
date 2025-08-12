@@ -2,6 +2,8 @@
 accompanistSystemuicontroller = "0.36.0"
 agp = "8.12.0"
 biometric = "1.4.0-alpha04"
+coilCompose = "3.3.0"
+coilNetworkOkhttp = "3.3.0"
 firebaseAi = "17.0.0"
 firebaseAnalytics = "23.0.0"
 firebaseAppcheck = "19.0.0"
@@ -57,6 +59,8 @@ androidx-compose-material3-material3 = { module = "androidx.compose.material3:ma
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltNavigationCompose" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilNetworkOkhttp" }
 firebase-ai = { module = "com.google.firebase:firebase-ai", version.ref = "firebaseAi" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebaseAnalytics" }
 firebase-appcheck = { module = "com.google.firebase:firebase-appcheck", version.ref = "firebaseAppcheck" }

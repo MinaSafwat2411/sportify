@@ -171,4 +171,8 @@ dependencies {
     implementation(libs.grpc.protobuf.lite)
     implementation(libs.grpc.stub)
     implementation(libs.grpc.core)
+
+    //coil
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 }

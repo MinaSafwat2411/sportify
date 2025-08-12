@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class ProfilePicture(
     @SerializedName("isUploaded")
-    val isUploaded: Boolean? = null,
+    val isUploaded: Boolean = false,
     @SerializedName("profileId")
     val profileId: Int? = null,
     @SerializedName("profileUrl")

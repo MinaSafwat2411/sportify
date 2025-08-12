@@ -18,5 +18,6 @@ class LayoutContract {
     data class State(
         val currentScreen: Int = 0,
         val userModel: UserModel? = null,
+        val avatar: Int = 0
     ): ViewState
 }

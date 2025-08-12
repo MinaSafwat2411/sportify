@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -40,11 +39,9 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
 import com.faswet.sportify.R
-import com.faswet.sportify.ui.base.compose.IBaseBottomNavigationBar
 import com.faswet.sportify.ui.main.contract.MainContract
-import com.faswet.sportify.ui.theme.Mirage
 import com.faswet.sportify.ui.theme.SportifyTheme
-import com.faswet.sportify.ui.theme.White
+import com.faswet.sportify.ui.theme.Transparent
 import com.faswet.sportify.utils.extentions.restartApp
 import com.faswet.sportify.utils.loacl.LocaleHelper
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -74,12 +71,11 @@ class MainActivity : AppCompatActivity() {
             val configuration = LocalConfiguration.current
             val systemUiController = rememberSystemUiController()
             val useDarkIcons = !(state.isDarkTheme ?: false)
-            val backgroundColor = if (state.isDarkTheme == true) Mirage else White
 
 
             LaunchedEffect(configuration.orientation, state.isDarkTheme) {
                 systemUiController.setSystemBarsColor(
-                    color = backgroundColor,
+                    color = Transparent,
                     darkIcons = useDarkIcons
                 )
             }
@@ -92,7 +88,6 @@ class MainActivity : AppCompatActivity() {
                         modifier = Modifier
                             .fillMaxSize()
                             .background(MaterialTheme.colorScheme.background)
-                            .safeDrawingPadding()
                     ) {
                         AppNavHost(viewModel = viewModel, navController = navController)
                     }
