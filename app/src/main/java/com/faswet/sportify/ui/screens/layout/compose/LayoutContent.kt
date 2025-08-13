@@ -143,7 +143,6 @@ fun LayoutContent(
     }
 }
 
-
 @Composable
 fun HomeScreen() {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
