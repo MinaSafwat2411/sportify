@@ -3,31 +3,25 @@ package com.faswet.sportify.ui.screens.layout.compose
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,12 +32,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.faswet.sportify.R
 import com.faswet.sportify.ui.base.compose.SportifyBottomNavBar
+import com.faswet.sportify.ui.base.compose.SportifyDrawer
 import com.faswet.sportify.ui.screens.layout.contract.LayoutContract
 import com.faswet.sportify.ui.theme.dimens
 import kotlinx.coroutines.launch
@@ -71,51 +65,7 @@ fun LayoutContent(
 
     ModalNavigationDrawer(
         drawerContent = {
-            ModalDrawerSheet(
-                drawerContainerColor = MaterialTheme.colorScheme.secondary,
-                modifier = modifier.width(MaterialTheme.dimens.size300dp),
-            ) {
-                IconButton(
-                    onClick = {
-                    },
-                    modifier = modifier.size(MaterialTheme.dimens.size120dp)
-                        .align(Alignment.CenterHorizontally)
-                ) {
-                    if (state.userModel?.profilePicture?.profileId == 0) {
-                        AsyncImage(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .data(state.userModel.profilePicture.profileUrl ?: "")
-                                .crossfade(true)
-                                .build(),
-                            placeholder = painterResource(R.drawable.ic_sportify_logo),
-                            error = painterResource(R.drawable.ic_sportify_logo),
-                            contentDescription = null,
-                            modifier = modifier
-                                .size(MaterialTheme.dimens.size120dp)
-                                .clip(CircleShape),
-                            contentScale = ContentScale.Fit
-                        )
-                    } else Image(
-                        painter = painterResource(state.avatar),
-                        contentDescription = null,
-                        modifier = modifier
-                            .size(MaterialTheme.dimens.size120dp)
-                            .clip(CircleShape)
-                    )
-                }
-                Spacer(modifier = modifier.height(MaterialTheme.dimens.size16dp))
-                NavigationDrawerItem(
-                    label = { Text(text = stringResource(R.string.settings), style = MaterialTheme.typography.titleMedium) },
-                    selected = false,
-                    onClick = { /*TODO*/ },
-                    icon = {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_settings),
-                            contentDescription = null
-                        )
-                    }
-                )
-            }
+            SportifyDrawer(state = state, onEventSent = onEventSent)
         },
         drawerState = drawerState,
         scrimColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
@@ -174,7 +124,7 @@ fun LayoutContent(
                             )
                         }
                     },
-                    windowInsets = TopAppBarDefaults.windowInsets
+                    windowInsets = WindowInsets(0)
                 )
             }
 
@@ -183,9 +133,9 @@ fun LayoutContent(
                 HorizontalPager(pager, modifier = modifier.fillMaxSize()) {
                     when (it) {
                         0 -> HomeScreen()
-                        1 -> SearchScreen()
-                        2 -> ProfileScreen()
-                        3 -> SettingsScreen()
+                        1 -> FavoriteScreen()
+                        2 -> BookingScreen()
+                        3 -> EventsScreen()
                     }
                 }
             }
@@ -202,22 +152,22 @@ fun HomeScreen() {
 }
 
 @Composable
-fun ProfileScreen() {
+fun FavoriteScreen() {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Profile Screen")
+        Text("Favorite Screen")
     }
 }
 
 @Composable
-fun SettingsScreen() {
+fun EventsScreen() {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Settings Screen")
+        Text("Events Screen")
     }
 }
 
 @Composable
-fun SearchScreen() {
+fun BookingScreen() {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Search Screen")
+        Text("Booking Screen")
     }
 }
