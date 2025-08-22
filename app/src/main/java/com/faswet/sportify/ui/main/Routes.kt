@@ -12,6 +12,8 @@ import androidx.navigation.compose.composable
 import com.faswet.sportify.ui.screens.layout.LayoutDestination
 import com.faswet.sportify.ui.screens.login.LoginScreenDestination
 import com.faswet.sportify.ui.screens.onboarding.OnBoardingDestination
+import com.faswet.sportify.ui.screens.profile.ProfileDestination
+import com.faswet.sportify.ui.screens.settings.SettingsDestination
 import com.faswet.sportify.ui.screens.splash.SplashScreenDestination
 import com.faswet.sportify.utils.activity.findActivity
 
@@ -48,6 +50,12 @@ fun AppNavHost(
         composable(NavigationScreen.Layout.route) {
             LayoutDestination(navController = navController)
         }
+        composable(NavigationScreen.Settings.route) {
+            SettingsDestination(navController = navController, viewModel = viewModel)
+        }
+        composable(NavigationScreen.Profile.route) {
+            ProfileDestination(navController = navController)
+        }
 
     }
     BackHandler {
@@ -82,7 +90,7 @@ fun AppNavHost(
 
 
 enum class Screen {
-    SPLASH, ON_BOARDING, LOGIN, PIN_ACCESS, SIGN_UP, LAYOUT
+    SPLASH, ON_BOARDING, LOGIN, PIN_ACCESS, SIGN_UP, LAYOUT , SETTINGS , PROFILE
 }
 
 sealed class NavigationScreen(val route: String) {
@@ -93,5 +101,8 @@ sealed class NavigationScreen(val route: String) {
     data object Signup : NavigationScreen(Screen.SIGN_UP.name)
 
     data object Layout : NavigationScreen(Screen.LAYOUT.name)
+
+    data object Settings : NavigationScreen(Screen.SETTINGS.name)
+    data object Profile : NavigationScreen(Screen.PROFILE.name)
 
 }

@@ -39,6 +39,9 @@ class MainViewModel @Inject constructor(
             is MainContract.Event.ToggleTheme -> {
                 saveThemeToPrefs(event.isDarkMode)
             }
+            MainContract.Event.OnBackClicked -> {
+                setEffect { MainContract.Effect.Navigation.ToLayout }
+            }
         }
     }
 

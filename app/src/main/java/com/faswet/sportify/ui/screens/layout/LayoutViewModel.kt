@@ -26,6 +26,12 @@ class LayoutViewModel @Inject constructor(
             is LayoutContract.Event.OnBottomNavClicked -> {
                 setState { copy(currentScreen = event.screen) }
             }
+            is LayoutContract.Event.OnSettingsClicked -> {
+                setEffect { LayoutContract.Effect.Navigation.ToSettings }
+            }
+            is LayoutContract.Event.OnProfileClicked -> {
+                setEffect { LayoutContract.Effect.Navigation.ToProfile }
+            }
         }
     }
 

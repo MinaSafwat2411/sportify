@@ -63,10 +63,6 @@ class MainActivity : AppCompatActivity() {
         }
         val lang = viewModel.getLang()
         val  isDark = viewModel.getIsDark()
-        AppCompatDelegate.setDefaultNightMode(
-            if (isDark) AppCompatDelegate.MODE_NIGHT_YES
-            else AppCompatDelegate.MODE_NIGHT_NO
-        )
         LocaleHelper.setLocale(this, lang)
         enableEdgeToEdge()
         actionBar?.hide()
@@ -103,58 +99,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-
-@Composable
-fun ThemeAndLanguageControls(viewModel: MainViewModel) {
-    val context = LocalContext.current
-    val  activity = context as MainActivity
-    val state by viewModel.viewState
-
-    Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
-        contentWindowInsets = WindowInsets.ime, modifier = Modifier
-            .windowInsetsPadding(WindowInsets.safeDrawing)
-            .fillMaxSize(),
-        bottomBar = {
-        }) { padding ->
-        Surface(
-            modifier = Modifier.fillMaxSize()
-                .padding(padding),
-            color = MaterialTheme.colorScheme.background,
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(24.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Button(onClick = {
-                    val newTheme = !(state.isDarkTheme ?: false)
-                    viewModel.setEvent(MainContract.Event.ToggleTheme(newTheme))
-                }) {
-                    Text(
-                        text = if (state.isDarkTheme == true) "Switch to Light" else "Switch to Dark",
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Button(onClick = {
-                    val newLang = if (state.currentLanguage == "en") "ar" else "en"
-                    viewModel.setEvent(MainContract.Event.ChangeLanguage(newLang, context))
-                    activity.restartApp()
-                }) {
-                    Text(
-                        stringResource(R.string.switch_language),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-            }
-        }
-    }
-}
 
 
 @Composable

@@ -70,7 +70,6 @@ fun LoginContent(
     ) {
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background,
-            contentWindowInsets = WindowInsets.ime,
         ) { paddingValues ->
 
             Surface(

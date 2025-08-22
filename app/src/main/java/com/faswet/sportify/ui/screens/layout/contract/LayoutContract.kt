@@ -10,9 +10,15 @@ class LayoutContract {
     sealed class Event : ViewEvent {
         data class OnScreenChanged(val screen: Int) : Event()
         data class OnBottomNavClicked(val screen: Int) : Event()
+
+        data object OnSettingsClicked : Event()
+
+        data object OnProfileClicked : Event()
     }
     sealed class Effect : ViewSideEffect {
         sealed class Navigation : Effect() {
+            object ToSettings : Navigation()
+            object ToProfile : Navigation()
         }
     }
     data class State(
