@@ -1,5 +1,6 @@
 package com.faswet.sportify.ui.screens.layout.compose
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -61,6 +62,18 @@ fun LayoutContent(
     }
     LaunchedEffect(pager.currentPage) {
         onEventSent(LayoutContract.Event.OnScreenChanged(pager.currentPage))
+    }
+    BackHandler{
+        if (drawerState.isOpen){
+            scope.launch {
+                drawerState.close()
+            }
+        }else if (pager.currentPage != 0){
+            scope.launch {
+                pager.animateScrollToPage(0)
+            }
+            onEventSent(LayoutContract.Event.OnScreenChanged(0))
+        }
     }
 
     ModalNavigationDrawer(
