@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         }
         val lang = viewModel.getLang()
         val  isDark = viewModel.getIsDark()
+        AppCompatDelegate.setDefaultNightMode(if (isDark) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
         LocaleHelper.setLocale(this, lang)
         enableEdgeToEdge()
         actionBar?.hide()

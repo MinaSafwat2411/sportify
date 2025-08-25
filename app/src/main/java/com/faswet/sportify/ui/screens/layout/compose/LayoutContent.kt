@@ -69,9 +69,6 @@ fun LayoutContent(
                 drawerState.close()
             }
         }else if (pager.currentPage != 0){
-            scope.launch {
-                pager.animateScrollToPage(0)
-            }
             onEventSent(LayoutContract.Event.OnScreenChanged(0))
         }
     }

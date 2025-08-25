@@ -164,7 +164,7 @@ fun SettingsContent(
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
-                        text = versionName.toString(),
+                        text = versionName?:"",
                         style = MaterialTheme.typography.titleMedium
                             .copy(
                                 color = GrayColor,
