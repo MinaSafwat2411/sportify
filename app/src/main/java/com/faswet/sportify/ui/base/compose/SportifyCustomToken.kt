@@ -39,7 +39,7 @@ fun SportifyCustomToken(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = modifier
                     .padding(
-                        horizontal = MaterialTheme.dimens.size5dp,
+                        horizontal = MaterialTheme.dimens.size12dp,
                         vertical = MaterialTheme.dimens.size7dp
                     )
                     .fillMaxWidth(),

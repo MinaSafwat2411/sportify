@@ -2,6 +2,7 @@ package com.faswet.sportify.firebase
 
 import com.faswet.sportify.data.models.FirebaseResponse
 import com.faswet.sportify.data.models.login.LoginRequest
+import com.faswet.sportify.data.models.membershipplan.MemberShipPlan
 import com.faswet.sportify.data.models.user.ProfilePicture
 import com.faswet.sportify.data.models.user.UserModel
 import com.faswet.sportify.utils.constants.Constants
@@ -187,7 +188,7 @@ class FirebaseService @Inject constructor(
                 return@suspendCancellableCoroutine
             }
 
-            firestore.collection(Constants.FirebaseFields.users).document(currentUser.uid).get()
+            firestore.collection(Constants.FireBaseCollections.users).document(currentUser.uid).get()
                 .addOnSuccessListener { document ->
                     val user = document.toObject(UserModel::class.java)?.copy(
                         profilePicture = (document.get("profilePicture") as? Map<*, *>)?.let {
@@ -207,6 +208,36 @@ class FirebaseService @Inject constructor(
                         onCancellation = { continuation.cancel() }
                     )
                 }
+        }
+    }
+
+    override suspend fun getMemberShip(doc: String): FirebaseResponse<MemberShipPlan?> {
+        return suspendCancellableCoroutine { continuation ->
+            val currentUser = firebaseAuth.currentUser
+            if (currentUser == null) {
+                continuation.resume(
+                    FirebaseResponse(
+                        status = false,
+                        data = null,
+                        message = "User not authenticated"
+                    ),
+                    onCancellation = { continuation.cancel() }
+                )
+                return@suspendCancellableCoroutine
+            }
+
+            firestore.collection(Constants.FireBaseCollections.memberShipPlans).document(doc).get()
+                .addOnSuccessListener { document ->
+                    val memberShip = document.toObject(MemberShipPlan::class.java)
+                    continuation.resume(
+                        FirebaseResponse(
+                            status = true,
+                            data = memberShip,
+                            message = "Success"
+                        ),
+                        onCancellation = { continuation.cancel() }
+                    )
+            }
         }
     }
 

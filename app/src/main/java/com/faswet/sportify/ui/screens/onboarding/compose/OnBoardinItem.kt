@@ -19,6 +19,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import com.faswet.sportify.R
 import com.faswet.sportify.ui.screens.onboarding.contract.OnBoardingContract
 import com.faswet.sportify.ui.theme.dimens
@@ -43,12 +44,16 @@ fun OnBoardingItem(
         Spacer(modifier.height(MaterialTheme.dimens.size60dp))
         Text(
             text = stringResource(state.titleList[index]),
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = TextAlign.Start,
+            modifier = modifier.fillMaxWidth()
         )
         Spacer(modifier.height(MaterialTheme.dimens.size8dp))
         Text(
             text = stringResource(state.descriptionList[index]),
-            style = MaterialTheme.typography.bodySmall
+            style = MaterialTheme.typography.bodySmall,
+            textAlign = TextAlign.Start,
+            modifier = modifier.fillMaxWidth()
         )
     }
 }

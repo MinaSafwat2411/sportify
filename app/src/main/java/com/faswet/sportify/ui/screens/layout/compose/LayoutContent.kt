@@ -94,7 +94,8 @@ fun LayoutContent(
                     title = {},
                     modifier
                         .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.primary),
+                        .background(MaterialTheme.colorScheme.primary)
+                        .padding(vertical = MaterialTheme.dimens.size8dp),
                     actions = {
                         IconButton(
                             onClick = {

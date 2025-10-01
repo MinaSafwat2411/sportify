@@ -9,7 +9,7 @@ import java.util.Locale
 object LocaleHelper {
     private fun updateResources(context: Context, language: String): Context {
         val appLocale = Locale(language)
-        val numberLocale = Locale("en")
+        val numberLocale = Locale(language)
         Locale.setDefault (appLocale)
         val config = Configuration().apply {
             setLocale(appLocale)

@@ -38,6 +38,6 @@
     <string name="profile">Profile</string>
     <string name="logout">Logout</string>
     <string name="version">Version</string>
-
-
+    <string name="membership">MemberShip</string>
+    <string name="status">Status</string>
 </resources>

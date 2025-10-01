@@ -33,6 +33,7 @@ abstract class  ProfileModule {
             ): IProfileRepository {
             return ProfileRepository(
                 connectionUtils,
+                mFirebaseService,
                 mIRemoteDataSource,
                 mILocalDataSource,
                 mIPreferencesDataSource,

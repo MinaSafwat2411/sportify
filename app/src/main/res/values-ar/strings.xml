@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">سبورتيفاي</string>
     <string name="switch_language">اختر اللغة</string>
-    <string name="switch_theme">تغيير السمة</string>    <string name="onboarding_title_1">ابدأ بسهولة مع تسجيل دخول بسيط</string>
+    <string name="switch_theme">تغيير السمة</string>
+    <string name="onboarding_title_1">ابدأ بسهولة مع تسجيل دخول بسيط</string>
     <string name="onboarding_title_2">احجز ملعبك الرياضي المفضل</string>
     <string name="onboarding_title_3">ابقَ على اطلاع بالأحداث والبطولات</string>
     <string name="onboarding_title_4">تابع تقدمك وإنجازاتك</string>
@@ -37,4 +38,6 @@
     <string name="profile">الملف الشخصي</string>
     <string name="logout">تسجيل الخروج</string>
     <string name="version">الإصدار</string>
+    <string name="membership">العضوية</string>
+    <string name="status">الحالة</string>
 </resources>

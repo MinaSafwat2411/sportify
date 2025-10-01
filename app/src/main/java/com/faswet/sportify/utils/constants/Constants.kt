@@ -34,11 +34,12 @@ object Constants {
     }
 
     object FireBaseCollections{
-
+        const val users = "Users"
+        const val memberShipPlans = "MemberShipPlans"
     }
 
     object FirebaseFields{
-        const val users = "Users"
+
     }
 
     object FirebaseQuery{

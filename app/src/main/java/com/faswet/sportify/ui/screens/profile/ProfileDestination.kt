@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.faswet.sportify.ui.screens.profile.contract.ProfileContract
-import com.faswet.sportify.ui.screens.profile.coompose.ProfileScreen
+import com.faswet.sportify.ui.screens.profile.compose.ProfileScreen
 
 @Composable
 fun ProfileDestination(

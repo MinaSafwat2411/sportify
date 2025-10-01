@@ -23,7 +23,8 @@ private val DarkColorScheme = darkColorScheme(
     outline = DarkGray,
     onBackground = White,
     onSecondary = White,
-    secondary = OxfordBlue
+    secondary = OxfordBlue,
+    surfaceVariant = GullGray,
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -39,7 +40,8 @@ private val LightColorScheme = lightColorScheme(
     outline = LightGray,
     onBackground = Black,
     onSecondary = Black,
-    secondary = CatskillWhite
+    secondary = CatskillWhite,
+    surfaceVariant = OxfordBlue,
 )
 
 @Composable
