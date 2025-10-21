@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.faswet.sportify.ui.main.NavigationScreen
 import com.faswet.sportify.ui.screens.profile.contract.ProfileContract
 import com.faswet.sportify.ui.screens.profile.compose.ProfileScreen
 
@@ -22,6 +23,13 @@ fun ProfileDestination(
             when (navigationEffect) {
                 is ProfileContract.Effect.Navigation.Back -> {
                     navController.popBackStack()
+                }
+                is ProfileContract.Effect.Navigation.ToLogin -> {
+                    navController.navigate(NavigationScreen.Login.route){
+                        popUpTo(0){
+                            inclusive = true
+                        }
+                    }
                 }
             }
         },

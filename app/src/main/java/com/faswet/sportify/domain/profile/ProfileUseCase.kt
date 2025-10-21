@@ -20,7 +20,12 @@ class ProfileUseCase @Inject constructor(
         iProfileRepository.setUserData(userModel)
     }
 
-    override fun getMemberShip(doc: String): Flow<Status<FirebaseResponse<MemberShipPlan?>>> {
+    override fun getMemberShip(doc: String): Flow<Status<MemberShipPlan?>> {
         return iProfileRepository.getMemberShipPlan(doc)
     }
+
+    override fun logout(): Flow<Status<Boolean>> {
+        return iProfileRepository.logout()
+    }
+
 }

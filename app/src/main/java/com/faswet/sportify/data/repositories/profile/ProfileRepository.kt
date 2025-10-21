@@ -34,9 +34,16 @@ class ProfileRepository @Inject constructor(
         mIPreferencesDataSource.setUserData(userModel)
     }
 
-    override fun getMemberShipPlan(doc: String): Flow<Status<FirebaseResponse<MemberShipPlan?>>> {
+    override fun getMemberShipPlan(doc: String): Flow<Status<MemberShipPlan?>> {
         return safeFirebaseCall {
-            mFirebaseService.getMemberShip(doc)
+            mIRemoteDataSource.getMemberShip(doc)
         }
     }
+
+    override fun logout(): Flow<Status<Boolean>> {
+        return safeFirebaseCall {
+            mIRemoteDataSource.logout()
+        }
+    }
+
 }

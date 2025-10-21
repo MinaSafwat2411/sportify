@@ -11,7 +11,7 @@ interface ISplashUseCase : IBaseUseCase {
     fun getAppIsOpened(): Boolean
     fun getUserUID(): String?
 
-    fun getUserData(): Flow<Status<FirebaseResponse<UserModel?>>>
+    fun getUserData(): Flow<Status<UserModel?>>
 
     fun setUserData(user: UserModel)
 }

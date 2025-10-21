@@ -22,6 +22,7 @@ fun ProfileScreen(
         effectFlow.onEach { effect ->
             when (effect) {
                 is ProfileContract.Effect.Navigation.Back -> onNavigationRequested(effect)
+                is ProfileContract.Effect.Navigation.ToLogin -> onNavigationRequested(effect)
             }
         }.collect()
     }

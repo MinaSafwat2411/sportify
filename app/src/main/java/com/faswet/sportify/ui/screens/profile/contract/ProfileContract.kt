@@ -9,6 +9,7 @@ import com.faswet.sportify.ui.base.ViewState
 class ProfileContract {
     sealed class Event : ViewEvent {
         data object OnBackClicked : Event()
+        data object OnLogoutClicked : Event()
     }
 
     data class State(
@@ -22,6 +23,7 @@ class ProfileContract {
     sealed class Effect : ViewSideEffect{
         sealed class Navigation : Effect() {
             data object Back : Navigation()
+            data object ToLogin : Navigation()
         }
     }
 }

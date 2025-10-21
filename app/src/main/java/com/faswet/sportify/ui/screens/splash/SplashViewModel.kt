@@ -51,8 +51,8 @@ class SplashViewModel @Inject constructor(
                         setEffect { SplashContract.Effect.Navigation.ToLogin }
                         return@catch
                     }.collect {status ->
-                        if (status.data?.status == true){
-                            splashUseCase.setUserData(status.data.data?: UserModel())
+                        if (status.isSuccess()){
+                            splashUseCase.setUserData(status.data?: UserModel())
                             setEffect { SplashContract.Effect.Navigation.ToLayout }
                             return@collect
                         }else{

@@ -25,7 +25,7 @@ class LoginRepository @Inject constructor(
     @IoDispatcher dispatcher: CoroutineDispatcher = Dispatchers.IO
 ): BaseRepository(mConnectionUtils, mRemoteDataSource, mPreferencesDataSource, dispatcher),
     ILoginRepository {
-    override fun login(loginRequest: LoginRequest): Flow<Status<FirebaseResponse<AuthResult?>>> {
+    override fun login(loginRequest: LoginRequest): Flow<Status<AuthResult?>> {
         return safeFirebaseCall {
             mFirebaseService.loginWithEmail(loginRequest)
         }
@@ -35,7 +35,7 @@ class LoginRepository @Inject constructor(
         mPreferencesDataSource.setUserUID(user)
     }
 
-    override fun getUserData(): Flow<Status<FirebaseResponse<UserModel?>>> {
+    override fun getUserData(): Flow<Status<UserModel?>> {
         return safeFirebaseCall {
             mFirebaseService.getUserData()
         }

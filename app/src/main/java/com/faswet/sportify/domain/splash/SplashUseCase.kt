@@ -21,7 +21,7 @@ class SplashUseCase @Inject constructor(
         return splashRepository.getUserUID()
     }
 
-    override fun getUserData(): Flow<Status<FirebaseResponse<UserModel?>>> {
+    override fun getUserData(): Flow<Status<UserModel?>> {
         return splashRepository.getUserData()
     }
 

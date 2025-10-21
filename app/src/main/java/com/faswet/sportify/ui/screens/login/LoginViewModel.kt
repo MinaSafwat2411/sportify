@@ -85,11 +85,11 @@ class LoginViewModel @Inject constructor(
             }.catch {
                 setState { copy(errorMessage = it.message) }
             }.collect { result ->
-                if (result.data?.status == true) {
-                    loginUseCase.setUserUID(result.data.data?.user as FirebaseUser)
+                if (result.isSuccess()) {
+                    loginUseCase.setUserUID(result.data?.user as FirebaseUser)
                     getUserData()
                 }else{
-                    setState { copy(errorMessage = result.data?.message) }
+                    setState { copy(errorMessage = result.error) }
                 }
             }
         }
@@ -113,8 +113,8 @@ class LoginViewModel @Inject constructor(
             }.catch {
                 setState { copy(errorMessage = it.message) }
             }.collect {status ->
-                if (status.data?.status == true){
-                    loginUseCase.setUserData(status.data.data?: UserModel())
+                if (status.isSuccess()){
+                    loginUseCase.setUserData(status.data?: UserModel())
                     setEffect { LoginContract.Effect.Navigation.ToLayout }
                     return@collect
                 }else{

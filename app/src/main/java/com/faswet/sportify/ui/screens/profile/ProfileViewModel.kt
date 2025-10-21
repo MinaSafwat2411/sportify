@@ -30,6 +30,7 @@ class ProfileViewModel @Inject constructor(
             ProfileContract.Event.OnBackClicked -> {
                 setEffect { ProfileContract.Effect.Navigation.Back }
             }
+            ProfileContract.Event.OnLogoutClicked -> onLogoutClicked()
         }
     }
 
@@ -67,10 +68,34 @@ class ProfileViewModel @Inject constructor(
             }.catch {
                 setState { copy(errorMessage = it.message) }
             }.collect{status ->
-                if (status.data?.status == true){
-                    setState { copy(memberShipPlan = status.data.data?: MemberShipPlan()) }
+                if (status.isSuccess()){
+                    setState { copy(memberShipPlan = status.data?: MemberShipPlan()) }
                 }else{
-                    setState { copy(errorMessage = status.data?.message) }
+                    setState { copy(errorMessage = status.error) }
+                }
+            }
+        }
+    }
+
+    private fun onLogoutClicked(){
+        val handler : CoroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+            viewModelScope.launch {
+                setState { copy(isLoading = false) }
+                exception.printStackTrace()
+            }
+        }
+        viewModelScope.launch(mainDispatcher + handler) {
+            profileUseCase.logout().onStart {
+                setState { copy(isLoading = true) }
+            }.onCompletion {
+                setState { copy(isLoading = false) }
+            }.catch {
+                setState { copy(errorMessage = it.message) }
+            }.collect{status ->
+                if (status.isSuccess()){
+                    setEffect { ProfileContract.Effect.Navigation.ToLogin }
+                }else{
+                    setState { copy(errorMessage = status.error) }
                 }
             }
         }

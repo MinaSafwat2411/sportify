@@ -94,13 +94,13 @@ class FirebaseService @Inject constructor(
         }
     }
 
-    override suspend fun logout(): FirebaseResponse<Nothing> {
+    override suspend fun logout(): FirebaseResponse<Boolean> {
         return suspendCancellableCoroutine { continuation ->
             firebaseAuth.signOut()
             continuation.resume(
                 FirebaseResponse(
                     status = true,
-                    data = null,
+                    data = true,
                     message = "Success",
                 ),
                 onCancellation = {

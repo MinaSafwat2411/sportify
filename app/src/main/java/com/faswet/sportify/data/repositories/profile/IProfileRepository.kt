@@ -11,6 +11,8 @@ interface IProfileRepository: IBaseRepository {
     fun getUserData(): UserModel?
     fun setUserData(userModel: UserModel)
 
-    fun getMemberShipPlan(doc: String):Flow<Status<FirebaseResponse<MemberShipPlan?>>>
+    fun getMemberShipPlan(doc: String):Flow<Status<MemberShipPlan?>>
+
+    fun logout() : Flow<Status<Boolean>>
 
 }

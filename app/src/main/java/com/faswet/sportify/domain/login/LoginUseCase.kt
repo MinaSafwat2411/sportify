@@ -14,7 +14,7 @@ import javax.inject.Inject
 class LoginUseCase @Inject constructor(
     private val mLoginRepository: ILoginRepository,
 ): BaseUseCase(mLoginRepository), ILoginUseCase {
-    override fun login(loginRequest: LoginRequest): Flow<Status<FirebaseResponse<AuthResult?>>> {
+    override fun login(loginRequest: LoginRequest): Flow<Status<AuthResult?>> {
         return mLoginRepository.login(loginRequest)
     }
 
@@ -22,7 +22,7 @@ class LoginUseCase @Inject constructor(
         mLoginRepository.setUserUID(user)
     }
 
-    override fun getUserData(): Flow<Status<FirebaseResponse<UserModel?>>> {
+    override fun getUserData(): Flow<Status<UserModel?>> {
         return mLoginRepository.getUserData()
     }
 

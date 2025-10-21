@@ -1,5 +1,6 @@
 package com.faswet.sportify.data.repositories.base
 
+import com.faswet.sportify.data.models.FirebaseResponse
 import com.faswet.sportify.data.models.status.Status
 import com.faswet.sportify.data.remote.IRemoteDataSource
 import com.faswet.sportify.data.sharedprefrences.IPreferencesDataSource
@@ -26,13 +27,13 @@ open class BaseRepository(
         }
 
     fun <T> safeFirebaseCall(
-        firebaseCall: suspend () -> T
+        firebaseCall: suspend () -> FirebaseResponse<T>
     ): Flow<Status<T>> {
         return flow {
             if (isConnected) {
                 try {
                     val response = firebaseCall.invoke()
-                    emit(Status.Success(response))
+                    emit(Status.Success(response.data))
                 } catch (e: FirebaseException) {
                     emit(Status.Error(data = null, error = e.message ?: ""))
                 } catch (e: Exception) {

@@ -9,13 +9,17 @@ import com.google.firebase.auth.FirebaseUser
 
 interface IRemoteDataSource {
     suspend fun loginWithEmail(loginRequest: LoginRequest): FirebaseResponse<AuthResult?>
+
     suspend fun registerWithEmail(loginRequest: LoginRequest): FirebaseResponse<AuthResult?>
+
     suspend fun sendPasswordResetEmail(email: String): FirebaseResponse<Nothing>
-    suspend fun logout(): FirebaseResponse<Nothing>
+
+    suspend fun logout(): FirebaseResponse<Boolean>
+
     suspend fun getCurrentUserId(): FirebaseResponse<FirebaseUser?>
 
     suspend fun getUserData(): FirebaseResponse<UserModel?>
 
-    suspend fun getMemberShipPlan(doc: String): FirebaseResponse<MemberShipPlan?>
+    suspend fun getMemberShip(doc: String): FirebaseResponse<MemberShipPlan?>
 
 }

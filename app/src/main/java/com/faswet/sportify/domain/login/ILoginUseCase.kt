@@ -10,10 +10,10 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.Flow
 
 interface ILoginUseCase: IBaseUseCase {
-    fun login(loginRequest: LoginRequest): Flow<Status<FirebaseResponse<AuthResult?>>>
+    fun login(loginRequest: LoginRequest): Flow<Status<AuthResult?>>
     fun setUserUID(user: FirebaseUser)
 
-    fun getUserData(): Flow<Status<FirebaseResponse<UserModel?>>>
+    fun getUserData(): Flow<Status<UserModel?>>
 
     fun setUserData(user: UserModel)
 }

@@ -33,7 +33,7 @@ class SplashRepository @Inject constructor(
         return mIPreferencesDataSource.getUserUID()
     }
 
-    override fun getUserData(): Flow<Status<FirebaseResponse<UserModel?>>> {
+    override fun getUserData(): Flow<Status<UserModel?>> {
         return safeFirebaseCall {
             mFirebaseService.getUserData()
         }

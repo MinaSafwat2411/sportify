@@ -17,7 +17,7 @@ class RemoteDataSource(private val mFirebaseService: IFirebaseService): IRemoteD
         return mFirebaseService.loginWithEmail(loginRequest)
     }
 
-    override suspend fun logout(): FirebaseResponse<Nothing> {
+    override suspend fun logout(): FirebaseResponse<Boolean> {
         return mFirebaseService.logout()
     }
 
@@ -33,9 +33,7 @@ class RemoteDataSource(private val mFirebaseService: IFirebaseService): IRemoteD
         return mFirebaseService.getUserData()
     }
 
-    override suspend fun getMemberShipPlan(doc: String): FirebaseResponse<MemberShipPlan?> {
+    override suspend fun getMemberShip(doc: String): FirebaseResponse<MemberShipPlan?> {
         return mFirebaseService.getMemberShip(doc)
     }
-
-
 }

@@ -14,7 +14,7 @@ interface IFirebaseService {
 
     suspend fun sendPasswordResetEmail(email: String): FirebaseResponse<Nothing>
 
-    suspend fun logout(): FirebaseResponse<Nothing>
+    suspend fun logout(): FirebaseResponse<Boolean>
 
     suspend fun getCurrentUserId(): FirebaseResponse<FirebaseUser?>
 
