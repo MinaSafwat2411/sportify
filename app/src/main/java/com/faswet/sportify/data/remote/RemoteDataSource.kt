@@ -1,12 +1,14 @@
 package com.faswet.sportify.data.remote
 
 import com.faswet.sportify.data.models.FirebaseResponse
+import com.faswet.sportify.data.models.events.EventResponse
 import com.faswet.sportify.data.models.login.LoginRequest
 import com.faswet.sportify.data.models.membershipplan.MemberShipPlan
 import com.faswet.sportify.data.models.user.UserModel
 import com.faswet.sportify.firebase.IFirebaseService
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.flow.Flow
 
 class RemoteDataSource(private val mFirebaseService: IFirebaseService): IRemoteDataSource {
     override suspend fun getCurrentUserId(): FirebaseResponse<FirebaseUser?> {
@@ -35,5 +37,9 @@ class RemoteDataSource(private val mFirebaseService: IFirebaseService): IRemoteD
 
     override suspend fun getMemberShip(doc: String): FirebaseResponse<MemberShipPlan?> {
         return mFirebaseService.getMemberShip(doc)
+    }
+
+    override fun getAllEvents(): Flow<FirebaseResponse<List<EventResponse>>> {
+        return mFirebaseService.getAllEvents()
     }
 }

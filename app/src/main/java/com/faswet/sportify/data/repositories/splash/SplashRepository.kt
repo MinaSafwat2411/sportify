@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SplashRepository @Inject constructor(
-    private val mFirebaseService: IFirebaseService,
     private val connectionUtils: IConnectionUtils,
     private val mIRemoteDataSource: IRemoteDataSource,
     private val mILocalDataSource: ILocalDataSource,
@@ -35,7 +34,7 @@ class SplashRepository @Inject constructor(
 
     override fun getUserData(): Flow<Status<UserModel?>> {
         return safeFirebaseCall {
-            mFirebaseService.getUserData()
+            mIRemoteDataSource.getUserData()
         }
     }
 

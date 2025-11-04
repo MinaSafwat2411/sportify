@@ -69,14 +69,14 @@ fun SportifyBottomNavBar(
 
                 val backgroundColor by transition.animateColor(
                     label = "background_color",
-                    transitionSpec = { tween(durationMillis = 900, easing = FastOutSlowInEasing) }
+                    transitionSpec = { tween(durationMillis = 300, easing = FastOutSlowInEasing) }
                 ) { isSelected ->
                     if (isSelected) MaterialTheme.colorScheme.primary else Transparent
                 }
 
                 val contentColor by transition.animateColor(
                     label = "icon_text_color",
-                    transitionSpec = { tween(durationMillis = 900) }
+                    transitionSpec = { tween(durationMillis = 300) }
                 ) { isSelected ->
                     if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.primary
                 }

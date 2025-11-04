@@ -84,24 +84,7 @@ fun SportifyDrawer(
             )
         }
         Spacer(modifier = modifier.height(MaterialTheme.dimens.size16dp))
-        NavigationDrawerItem(
-            label = {
-                Text(
-                    text = stringResource(R.string.settings),
-                    style = MaterialTheme.typography.titleMedium
-                )
-            },
-            selected = false,
-            onClick = {
-                onEventSent(LayoutContract.Event.OnSettingsClicked)
-            },
-            icon = {
-                Icon(
-                    painter = painterResource(R.drawable.ic_settings),
-                    contentDescription = null
-                )
-            },
-        )
+
         NavigationDrawerItem(
             label = {
                 Text(
@@ -116,6 +99,25 @@ fun SportifyDrawer(
             icon = {
                 Icon(
                     painter = painterResource(R.drawable.ic_person_unselected),
+                    contentDescription = null
+                )
+            },
+        )
+
+        NavigationDrawerItem(
+            label = {
+                Text(
+                    text = stringResource(R.string.settings),
+                    style = MaterialTheme.typography.titleMedium
+                )
+            },
+            selected = false,
+            onClick = {
+                onEventSent(LayoutContract.Event.OnSettingsClicked)
+            },
+            icon = {
+                Icon(
+                    painter = painterResource(R.drawable.ic_settings),
                     contentDescription = null
                 )
             },

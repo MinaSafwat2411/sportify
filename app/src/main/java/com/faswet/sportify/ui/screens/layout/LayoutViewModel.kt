@@ -2,36 +2,47 @@ package com.faswet.sportify.ui.screens.layout
 
 import com.faswet.sportify.R
 import com.faswet.sportify.di.MainDispatcher
+import com.faswet.sportify.domain.events.IEventsUseCase
 import com.faswet.sportify.domain.layout.ILayoutUseCase
 import com.faswet.sportify.ui.base.BaseViewModel
 import com.faswet.sportify.ui.screens.layout.contract.LayoutContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LayoutViewModel @Inject constructor(
     private val layoutUseCase: ILayoutUseCase,
+    private val eventsUseCase: IEventsUseCase,
     @MainDispatcher private val mainDispatcher: CoroutineDispatcher,
 ) : BaseViewModel<LayoutContract.Event, LayoutContract.State, LayoutContract.Effect>() {
     init {
         setState { copy(userModel = layoutUseCase.getUserData()) }
         setState { copy(avatar = getProfilePic(userModel?.profilePicture?.profileId ?: 0)) }
+        handleEvents(LayoutContract.Event.GetData)
     }
+
     override fun handleEvents(event: LayoutContract.Event) {
         when (event) {
             is LayoutContract.Event.OnScreenChanged -> {
                 setState { copy(currentScreen = event.screen) }
             }
+
             is LayoutContract.Event.OnBottomNavClicked -> {
                 setState { copy(currentScreen = event.screen) }
             }
+
             is LayoutContract.Event.OnSettingsClicked -> {
                 setEffect { LayoutContract.Effect.Navigation.ToSettings }
             }
+
             is LayoutContract.Event.OnProfileClicked -> {
                 setEffect { LayoutContract.Effect.Navigation.ToProfile }
             }
+
+            LayoutContract.Event.GetData -> getData()
         }
     }
 
@@ -40,8 +51,8 @@ class LayoutViewModel @Inject constructor(
         userModel = null
     )
 
-    private fun getProfilePic(id :Int): Int{
-        return when (id){
+    private fun getProfilePic(id: Int): Int {
+        return when (id) {
             1 -> R.drawable.ic_profile_1
             2 -> R.drawable.ic_profile_2
             3 -> R.drawable.ic_profile_3
@@ -52,6 +63,23 @@ class LayoutViewModel @Inject constructor(
             8 -> R.drawable.ic_profile_8
             9 -> R.drawable.ic_profile_9
             else -> R.drawable.ic_sportify_logo
+        }
+    }
+
+    private fun getData() {
+        val handler = CoroutineExceptionHandler { _, exception ->
+            viewModelScope.launch {
+                setState { copy(isLoading = false) }
+                exception.printStackTrace()
+            }
+        }
+
+        viewModelScope.launch(mainDispatcher + handler) {
+            eventsUseCase.getAllEvents().collect {status->
+                if (status.status){
+                    setState { copy(events = status.data?: emptyList()) }
+                }
+            }
         }
     }
 }

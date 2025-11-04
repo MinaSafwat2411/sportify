@@ -1,11 +1,14 @@
 package com.faswet.sportify.firebase
 
 import com.faswet.sportify.data.models.FirebaseResponse
+import com.faswet.sportify.data.models.events.EventResponse
 import com.faswet.sportify.data.models.login.LoginRequest
 import com.faswet.sportify.data.models.membershipplan.MemberShipPlan
 import com.faswet.sportify.data.models.user.UserModel
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.EventListener
+import kotlinx.coroutines.flow.Flow
 
 interface IFirebaseService {
     suspend fun loginWithEmail(loginRequest: LoginRequest): FirebaseResponse<AuthResult?>
@@ -21,4 +24,6 @@ interface IFirebaseService {
     suspend fun getUserData(): FirebaseResponse<UserModel?>
 
     suspend fun getMemberShip(doc: String): FirebaseResponse<MemberShipPlan?>
+
+    fun getAllEvents(): Flow<FirebaseResponse<List<EventResponse>>>
 }

@@ -19,11 +19,9 @@ import javax.inject.Inject
 
 class ProfileRepository @Inject constructor(
     private val connectionUtils: IConnectionUtils,
-    private val mFirebaseService: IFirebaseService,
     private val mIRemoteDataSource: IRemoteDataSource,
     private val mILocalDataSource: ILocalDataSource,
     private val mIPreferencesDataSource: IPreferencesDataSource,
-    private val  mIGoogleDriveUploader: IGoogleDriveUploader,
     @IoDispatcher dispatcher: CoroutineDispatcher = Dispatchers.IO
 ): BaseRepository(connectionUtils, mIRemoteDataSource, mIPreferencesDataSource, dispatcher), IProfileRepository {
     override fun getUserData(): UserModel? {

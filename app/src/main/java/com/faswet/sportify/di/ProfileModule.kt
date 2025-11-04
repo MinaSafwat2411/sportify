@@ -28,16 +28,12 @@ abstract class  ProfileModule {
             mIRemoteDataSource: IRemoteDataSource,
             mIPreferencesDataSource: IPreferencesDataSource,
             mILocalDataSource: ILocalDataSource,
-            mFirebaseService: IFirebaseService,
-            mGoogleDriveUploader: IGoogleDriveUploader,
             ): IProfileRepository {
             return ProfileRepository(
                 connectionUtils,
-                mFirebaseService,
                 mIRemoteDataSource,
                 mILocalDataSource,
                 mIPreferencesDataSource,
-                mGoogleDriveUploader,
             )
         }
     }

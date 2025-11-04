@@ -24,14 +24,12 @@ abstract class SplashModule {
         @Singleton
         @Provides
         fun provideSplashRepository(
-            mFirebaseService: IFirebaseService,
             connectionUtils: IConnectionUtils,
             mIRemoteDataSource: IRemoteDataSource,
             mILocalDataSource: ILocalDataSource,
             mIPreferencesDataSource: IPreferencesDataSource,
         ): ISplashRepository {
             return SplashRepository(
-                mFirebaseService,
                 connectionUtils,
                 mIRemoteDataSource,
                 mILocalDataSource,

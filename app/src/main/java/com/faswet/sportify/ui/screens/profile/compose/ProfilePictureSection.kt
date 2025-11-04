@@ -32,14 +32,15 @@ fun ProfilePictureSection(
     state: ProfileContract.State,
     onEventSent: (event: ProfileContract.Event) -> Unit,
     modifier: Modifier = Modifier,
-    ) {
+) {
     Box(
         contentAlignment = Alignment.Center
     ) {
         Image(
             painterResource(R.drawable.ic_profile_section),
             contentDescription = null,
-            modifier = modifier.height(MaterialTheme.dimens.size80dp)
+            modifier = modifier
+                .height(MaterialTheme.dimens.size80dp)
                 .fillMaxWidth()
                 .padding(horizontal = MaterialTheme.dimens.size12dp),
             contentScale = ContentScale.FillHeight

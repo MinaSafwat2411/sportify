@@ -1,27 +1,27 @@
-package com.faswet.sportify.data.repositories.layout
+package com.faswet.sportify.data.repositories.events
 
 import com.faswet.sportify.data.drive.IGoogleDriveUploader
 import com.faswet.sportify.data.local.ILocalDataSource
-import com.faswet.sportify.data.models.user.UserModel
+import com.faswet.sportify.data.models.FirebaseResponse
+import com.faswet.sportify.data.models.events.EventResponse
 import com.faswet.sportify.data.remote.IRemoteDataSource
 import com.faswet.sportify.data.repositories.base.BaseRepository
 import com.faswet.sportify.data.sharedprefrences.IPreferencesDataSource
 import com.faswet.sportify.di.IoDispatcher
-import com.faswet.sportify.firebase.IFirebaseService
 import com.faswet.sportify.utils.connection.IConnectionUtils
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
-class LayoutRepository @Inject constructor(
+class EventsRepository(
     private val connectionUtils: IConnectionUtils,
     private val mIRemoteDataSource: IRemoteDataSource,
     private val mILocalDataSource: ILocalDataSource,
     private val mIPreferencesDataSource: IPreferencesDataSource,
     @IoDispatcher dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : BaseRepository(connectionUtils, mIRemoteDataSource, mIPreferencesDataSource, dispatcher),
-    ILayoutRepository {
-    override fun getUserData(): UserModel? {
-        return mIPreferencesDataSource.getUserData()
+    IEventsRepository {
+    override fun getAllEvents(): Flow<FirebaseResponse<List<EventResponse>>> {
+        return mIRemoteDataSource.getAllEvents()
     }
 }

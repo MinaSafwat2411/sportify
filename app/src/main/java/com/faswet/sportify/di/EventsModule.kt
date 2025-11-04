@@ -1,14 +1,12 @@
 package com.faswet.sportify.di
 
-import com.faswet.sportify.data.drive.IGoogleDriveUploader
 import com.faswet.sportify.data.local.ILocalDataSource
 import com.faswet.sportify.data.remote.IRemoteDataSource
-import com.faswet.sportify.data.repositories.layout.ILayoutRepository
-import com.faswet.sportify.data.repositories.layout.LayoutRepository
+import com.faswet.sportify.data.repositories.events.EventsRepository
+import com.faswet.sportify.data.repositories.events.IEventsRepository
 import com.faswet.sportify.data.sharedprefrences.IPreferencesDataSource
-import com.faswet.sportify.domain.layout.ILayoutUseCase
-import com.faswet.sportify.domain.layout.LayoutUseCase
-import com.faswet.sportify.firebase.IFirebaseService
+import com.faswet.sportify.domain.events.EventsUseCase
+import com.faswet.sportify.domain.events.IEventsUseCase
 import com.faswet.sportify.utils.connection.IConnectionUtils
 import dagger.Binds
 import dagger.Module
@@ -19,17 +17,17 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class  LayoutModule {
+abstract class  EventsModule {
     companion object{
         @Provides
         @Singleton
-        fun provideLayoutRepository(
+        fun provideEventsRepository(
             connectionUtils: IConnectionUtils,
             mIRemoteDataSource: IRemoteDataSource,
             mIPreferencesDataSource: IPreferencesDataSource,
             mILocalDataSource: ILocalDataSource,
-            ): ILayoutRepository {
-            return LayoutRepository(
+        ): IEventsRepository {
+            return EventsRepository(
                 connectionUtils,
                 mIRemoteDataSource,
                 mILocalDataSource,
@@ -38,5 +36,5 @@ abstract class  LayoutModule {
         }
     }
     @Binds
-    abstract fun bindILayoutUseCase(useCase: LayoutUseCase): ILayoutUseCase
+    abstract fun bindIEventsUseCase(useCase: EventsUseCase): IEventsUseCase
 }

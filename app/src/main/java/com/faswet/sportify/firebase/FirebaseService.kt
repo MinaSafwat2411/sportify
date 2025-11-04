@@ -1,6 +1,7 @@
 package com.faswet.sportify.firebase
 
 import com.faswet.sportify.data.models.FirebaseResponse
+import com.faswet.sportify.data.models.events.EventResponse
 import com.faswet.sportify.data.models.login.LoginRequest
 import com.faswet.sportify.data.models.membershipplan.MemberShipPlan
 import com.faswet.sportify.data.models.user.ProfilePicture
@@ -14,6 +15,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -72,11 +76,8 @@ class FirebaseService @Inject constructor(
                             status = true,
                             data = result,
                             message = "Success",
-                        ),
-                        onCancellation = {
-                            continuation.cancel()
-                        }
-                    )
+                        )
+                    ) { cause, _, _ -> continuation.cancel() }
                 } else {
                     val exception = task.exception
                     continuation.resume(
@@ -84,11 +85,8 @@ class FirebaseService @Inject constructor(
                             status = false,
                             data = null,
                             message = exception?.message ?: "Unknown error",
-                        ),
-                        onCancellation = {
-                            continuation.cancel()
-                        }
-                    )
+                        )
+                    ) { cause, _, _ -> continuation.cancel() }
                 }
             }
         }
@@ -102,11 +100,8 @@ class FirebaseService @Inject constructor(
                     status = true,
                     data = true,
                     message = "Success",
-                ),
-                onCancellation = {
-                    continuation.cancel()
-                }
-            )
+                )
+            ) { cause, _, _ -> continuation.cancel() }
         }
     }
 
@@ -121,11 +116,8 @@ class FirebaseService @Inject constructor(
                             status = true,
                             data = null,
                             message = "Success",
-                        ),
-                        onCancellation = {
-                            continuation.cancel()
-                        }
-                    )
+                        )
+                    ) { cause, _, _ -> continuation.cancel() }
                 } else {
                     val exception = task.exception
                     continuation.resume(
@@ -133,10 +125,8 @@ class FirebaseService @Inject constructor(
                             status = false,
                             data = null,
                             message = exception?.message ?: "Unknown error",
-                        ),
-                        onCancellation = {
-                            continuation.cancel()
-                        })
+                        )
+                    ) { cause, _, _ -> continuation.cancel() }
                 }
             }
 
@@ -152,22 +142,16 @@ class FirebaseService @Inject constructor(
                         status = true,
                         data = currentUser,
                         message = "Success",
-                    ),
-                    onCancellation = {
-                        continuation.cancel()
-                    }
-                )
+                    )
+                ) { cause, _, _ -> continuation.cancel() }
             } else {
                 continuation.resume(
                     FirebaseResponse(
                         status = false,
                         data = null,
                         message = "User not found",
-                    ),
-                    onCancellation = {
-                        continuation.cancel()
-                    }
-                )
+                    )
+                ) { cause, _, _ -> continuation.cancel() }
             }
 
         }
@@ -182,9 +166,8 @@ class FirebaseService @Inject constructor(
                         status = false,
                         data = null,
                         message = "User not authenticated"
-                    ),
-                    onCancellation = { continuation.cancel() }
-                )
+                    )
+                ) { cause, _, _ -> continuation.cancel() }
                 return@suspendCancellableCoroutine
             }
 
@@ -204,9 +187,8 @@ class FirebaseService @Inject constructor(
                             status = true,
                             data = user,
                             message = "Success"
-                        ),
-                        onCancellation = { continuation.cancel() }
-                    )
+                        )
+                    ) { cause, _, _ -> continuation.cancel() }
                 }
         }
     }
@@ -220,9 +202,8 @@ class FirebaseService @Inject constructor(
                         status = false,
                         data = null,
                         message = "User not authenticated"
-                    ),
-                    onCancellation = { continuation.cancel() }
-                )
+                    )
+                ) { cause, _, _ -> continuation.cancel() }
                 return@suspendCancellableCoroutine
             }
 
@@ -234,11 +215,46 @@ class FirebaseService @Inject constructor(
                             status = true,
                             data = memberShip,
                             message = "Success"
-                        ),
-                        onCancellation = { continuation.cancel() }
-                    )
-            }
+                        )
+                    ) { cause, _, _ -> continuation.cancel() }
+                }
         }
+    }
+
+    override fun getAllEvents(): Flow<FirebaseResponse<List<EventResponse>>> = callbackFlow {
+        val listener = firestore.collection(Constants.FireBaseCollections.events)
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    trySend(
+                        FirebaseResponse(
+                            status = false,
+                            data = null,
+                            message = e.message ?: "Unknown Firestore error"
+                        )
+                    )
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null) {
+                    val events = snapshot.toObjects(EventResponse::class.java)
+                    trySend(
+                        FirebaseResponse(
+                            status = true,
+                            data = events,
+                            message = "Success"
+                        )
+                    )
+                } else {
+                    trySend(
+                        FirebaseResponse(
+                            status = false,
+                            data = null,
+                            message = "Snapshot is null"
+                        )
+                    )
+                }
+            }
+        awaitClose { listener.remove() }
     }
 
 }
