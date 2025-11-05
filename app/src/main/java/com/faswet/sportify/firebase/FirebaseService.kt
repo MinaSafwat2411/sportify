@@ -1,6 +1,8 @@
 package com.faswet.sportify.firebase
 
+import android.util.Log
 import com.faswet.sportify.data.models.FirebaseResponse
+import com.faswet.sportify.data.models.booking.BookingResponse
 import com.faswet.sportify.data.models.events.EventResponse
 import com.faswet.sportify.data.models.login.LoginRequest
 import com.faswet.sportify.data.models.membershipplan.MemberShipPlan
@@ -237,6 +239,42 @@ class FirebaseService @Inject constructor(
 
                 if (snapshot != null) {
                     val events = snapshot.toObjects(EventResponse::class.java)
+                    trySend(
+                        FirebaseResponse(
+                            status = true,
+                            data = events,
+                            message = "Success"
+                        )
+                    )
+                } else {
+                    trySend(
+                        FirebaseResponse(
+                            status = false,
+                            data = null,
+                            message = "Snapshot is null"
+                        )
+                    )
+                }
+            }
+        awaitClose { listener.remove() }
+    }
+
+    override fun getAllBooking() : Flow<FirebaseResponse<List<BookingResponse>>> = callbackFlow {
+        val listener = firestore.collection(Constants.FireBaseCollections.booking)
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    trySend(
+                        FirebaseResponse(
+                            status = false,
+                            data = null,
+                            message = e.message ?: "Unknown Firestore error"
+                        )
+                    )
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null) {
+                    val events = snapshot.toObjects(BookingResponse::class.java)
                     trySend(
                         FirebaseResponse(
                             status = true,

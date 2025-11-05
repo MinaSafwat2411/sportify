@@ -22,6 +22,7 @@ fun LayoutScreen(
             when (effect) {
                 is LayoutContract.Effect.Navigation.ToSettings -> onNavigationRequested(effect)
                 is LayoutContract.Effect.Navigation.ToProfile -> onNavigationRequested(effect)
+                is LayoutContract.Effect.Navigation.Back -> onNavigationRequested(effect)
             }
         }?.collect()
     }

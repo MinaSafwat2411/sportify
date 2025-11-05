@@ -1,6 +1,7 @@
 package com.faswet.sportify.firebase
 
 import com.faswet.sportify.data.models.FirebaseResponse
+import com.faswet.sportify.data.models.booking.BookingResponse
 import com.faswet.sportify.data.models.events.EventResponse
 import com.faswet.sportify.data.models.login.LoginRequest
 import com.faswet.sportify.data.models.membershipplan.MemberShipPlan
@@ -26,4 +27,6 @@ interface IFirebaseService {
     suspend fun getMemberShip(doc: String): FirebaseResponse<MemberShipPlan?>
 
     fun getAllEvents(): Flow<FirebaseResponse<List<EventResponse>>>
+
+    fun getAllBooking(): Flow<FirebaseResponse<List<BookingResponse>>>
 }

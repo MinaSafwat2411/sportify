@@ -1,6 +1,7 @@
 package com.faswet.sportify.ui.main
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import com.faswet.sportify.data.repositories.main.IMainRepository
 import com.faswet.sportify.ui.base.BaseViewModel
 import com.faswet.sportify.ui.main.contract.MainContract
@@ -52,6 +53,7 @@ class MainViewModel @Inject constructor(
 
     private fun saveThemeToPrefs(isDark: Boolean) {
         iMainRepository.setIsDark(isDark)
+        AppCompatDelegate.setDefaultNightMode(if (isDark) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
         setState { copy(isDarkTheme = isDark) }
     }
     fun getLang(): String {

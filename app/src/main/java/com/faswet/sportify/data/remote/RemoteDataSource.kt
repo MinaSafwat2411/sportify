@@ -1,6 +1,7 @@
 package com.faswet.sportify.data.remote
 
 import com.faswet.sportify.data.models.FirebaseResponse
+import com.faswet.sportify.data.models.booking.BookingResponse
 import com.faswet.sportify.data.models.events.EventResponse
 import com.faswet.sportify.data.models.login.LoginRequest
 import com.faswet.sportify.data.models.membershipplan.MemberShipPlan
@@ -41,5 +42,9 @@ class RemoteDataSource(private val mFirebaseService: IFirebaseService): IRemoteD
 
     override fun getAllEvents(): Flow<FirebaseResponse<List<EventResponse>>> {
         return mFirebaseService.getAllEvents()
+    }
+
+    override fun getAllBooking(): Flow<FirebaseResponse<List<BookingResponse>>> {
+        return mFirebaseService.getAllBooking()
     }
 }

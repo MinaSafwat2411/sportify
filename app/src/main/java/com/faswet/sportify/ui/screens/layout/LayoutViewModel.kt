@@ -2,6 +2,7 @@ package com.faswet.sportify.ui.screens.layout
 
 import com.faswet.sportify.R
 import com.faswet.sportify.di.MainDispatcher
+import com.faswet.sportify.domain.booking.IBookingUseCase
 import com.faswet.sportify.domain.events.IEventsUseCase
 import com.faswet.sportify.domain.layout.ILayoutUseCase
 import com.faswet.sportify.ui.base.BaseViewModel
@@ -9,6 +10,8 @@ import com.faswet.sportify.ui.screens.layout.contract.LayoutContract
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,8 +19,12 @@ import javax.inject.Inject
 class LayoutViewModel @Inject constructor(
     private val layoutUseCase: ILayoutUseCase,
     private val eventsUseCase: IEventsUseCase,
+    private val bookingUseCase: IBookingUseCase,
     @MainDispatcher private val mainDispatcher: CoroutineDispatcher,
 ) : BaseViewModel<LayoutContract.Event, LayoutContract.State, LayoutContract.Effect>() {
+
+    private var dataJob: Job? = null
+
     init {
         setState { copy(userModel = layoutUseCase.getUserData()) }
         setState { copy(avatar = getProfilePic(userModel?.profilePicture?.profileId ?: 0)) }
@@ -43,6 +50,8 @@ class LayoutViewModel @Inject constructor(
             }
 
             LayoutContract.Event.GetData -> getData()
+
+            LayoutContract.Event.OnBackClicked -> onBackClicked()
         }
     }
 
@@ -73,13 +82,34 @@ class LayoutViewModel @Inject constructor(
                 exception.printStackTrace()
             }
         }
+        dataJob?.cancel()
 
-        viewModelScope.launch(mainDispatcher + handler) {
-            eventsUseCase.getAllEvents().collect {status->
-                if (status.status){
-                    setState { copy(events = status.data?: emptyList()) }
-                }
+        dataJob = viewModelScope.launch(handler + mainDispatcher) {
+            combine(
+                eventsUseCase.getAllEvents(),
+                bookingUseCase.getAllBooking(),
+            ) { eventsResponse, bookingsResponse ->
+                LayoutContract.State(
+                    events = eventsResponse.data.orEmpty(),
+                    bookings = bookingsResponse.data.orEmpty(),
+                    isLoading = false
+                )
+            }.collect { newState ->
+                setState { copy(events = newState.events, bookings = newState.bookings) }
             }
         }
+    }
+
+    private fun  onBackClicked(){
+        if (viewState.value.currentScreen != 0) {
+            handleEvents(LayoutContract.Event.OnScreenChanged(0))
+        }else{
+            setEffect { LayoutContract.Effect.Navigation.Back }
+        }
+    }
+
+    override fun onCleared() {
+        dataJob?.cancel()
+        super.onCleared()
     }
 }

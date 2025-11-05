@@ -38,6 +38,8 @@ object Constants {
         const val memberShipPlans = "MemberShipPlans"
 
         const val events = "Events"
+
+        const val booking = "Bookings"
     }
 
     object FirebaseFields{

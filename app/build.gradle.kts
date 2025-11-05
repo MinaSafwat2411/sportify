@@ -175,4 +175,7 @@ dependencies {
     //coil
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
+
 }

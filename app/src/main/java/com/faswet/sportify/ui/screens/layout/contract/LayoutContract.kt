@@ -1,10 +1,12 @@
 package com.faswet.sportify.ui.screens.layout.contract
 
+import com.faswet.sportify.data.models.booking.BookingResponse
 import com.faswet.sportify.data.models.events.EventResponse
 import com.faswet.sportify.data.models.user.UserModel
 import com.faswet.sportify.ui.base.ViewEvent
 import com.faswet.sportify.ui.base.ViewSideEffect
 import com.faswet.sportify.ui.base.ViewState
+import java.util.Date
 
 class LayoutContract {
     sealed class Event : ViewEvent {
@@ -16,11 +18,15 @@ class LayoutContract {
         data object OnProfileClicked : Event()
 
         data object GetData : Event()
+
+        data object OnBackClicked : Event()
     }
     sealed class Effect : ViewSideEffect {
         sealed class Navigation : Effect() {
-            object ToSettings : Navigation()
-            object ToProfile : Navigation()
+            data object ToSettings : Navigation()
+            data object ToProfile : Navigation()
+
+            data object Back : Navigation()
         }
     }
     data class State(
@@ -29,6 +35,8 @@ class LayoutContract {
         val avatar: Int = 0,
         val isLoading: Boolean = false,
         val errorMessage: String? = null,
-        val events : List<EventResponse> = emptyList()
+        val events : List<EventResponse> = emptyList(),
+        val bookings : List<BookingResponse> = emptyList(),
+        val selectedDate: Date = Date()
     ): ViewState
 }

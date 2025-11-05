@@ -15,6 +15,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -39,6 +40,7 @@ import coil3.request.crossfade
 import com.faswet.sportify.R
 import com.faswet.sportify.ui.base.compose.SportifyBottomNavBar
 import com.faswet.sportify.ui.base.compose.SportifyDrawer
+import com.faswet.sportify.ui.screens.layout.compose.events.EventsContent
 import com.faswet.sportify.ui.screens.layout.contract.LayoutContract
 import com.faswet.sportify.ui.theme.dimens
 import kotlinx.coroutines.launch
@@ -63,13 +65,13 @@ fun LayoutContent(
     LaunchedEffect(pager.currentPage) {
         onEventSent(LayoutContract.Event.OnScreenChanged(pager.currentPage))
     }
-    BackHandler{
-        if (drawerState.isOpen){
+    BackHandler {
+        if (drawerState.isOpen) {
             scope.launch {
                 drawerState.close()
             }
-        }else if (pager.currentPage != 0){
-            onEventSent(LayoutContract.Event.OnScreenChanged(0))
+        } else {
+            onEventSent(LayoutContract.Event.OnBackClicked)
         }
     }
 
@@ -102,7 +104,10 @@ fun LayoutContent(
 
                             },
                         ) {
-                            Icon(painter = painterResource(R.drawable.ic_notification), contentDescription = null)
+                            Icon(
+                                painter = painterResource(R.drawable.ic_notification),
+                                contentDescription = null
+                            )
                         }
                     },
                     navigationIcon = {
@@ -137,6 +142,22 @@ fun LayoutContent(
                     },
                     windowInsets = WindowInsets(0)
                 )
+            },
+            floatingActionButton = {
+                if (pager.currentPage == 2 || (pager.currentPage == 3 && state.userModel?.role?.roleValue==1))
+                FloatingActionButton(
+                    onClick = { },
+                    modifier = modifier
+                        .size(MaterialTheme.dimens.size56dp),
+                    containerColor = MaterialTheme.colorScheme.onPrimary,
+                    contentColor = MaterialTheme.colorScheme.primary,
+                    shape = CircleShape,
+                ) {
+                    Icon(
+                        painter = painterResource(if (pager.currentPage == 2) R.drawable.ic_edit else R.drawable.ic_add),
+                        contentDescription = null,
+                    )
+                }
             }
 
         ) { padding ->
@@ -146,7 +167,7 @@ fun LayoutContent(
                         0 -> HomeScreen()
                         1 -> FavoriteScreen()
                         2 -> BookingScreen()
-                        3 -> EventsScreen()
+                        3 -> EventsScreen(state,onEventSent)
                     }
                 }
             }
@@ -170,9 +191,9 @@ fun FavoriteScreen() {
 }
 
 @Composable
-fun EventsScreen() {
+fun EventsScreen(state: LayoutContract.State,onEventSent: (LayoutContract.Event) -> Unit) {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Events Screen")
+        EventsContent(state,onEventSent)
     }
 }
 
