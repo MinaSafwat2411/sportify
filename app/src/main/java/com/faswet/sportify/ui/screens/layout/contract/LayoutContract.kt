@@ -20,6 +20,10 @@ class LayoutContract {
         data object GetData : Event()
 
         data object OnBackClicked : Event()
+        data class OnDateChanged(val date: Date) : Event()
+        data object OnNextMonthClicked : Event()
+        data object OnPreviousMonthClicked : Event()
+
     }
     sealed class Effect : ViewSideEffect {
         sealed class Navigation : Effect() {

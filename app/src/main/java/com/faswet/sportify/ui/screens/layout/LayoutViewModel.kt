@@ -13,6 +13,8 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import java.util.Calendar
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
@@ -52,6 +54,15 @@ class LayoutViewModel @Inject constructor(
             LayoutContract.Event.GetData -> getData()
 
             LayoutContract.Event.OnBackClicked -> onBackClicked()
+            is LayoutContract.Event.OnDateChanged -> {
+                setState { copy(selectedDate = event.date) }
+            }
+            is LayoutContract.Event.OnNextMonthClicked-> {
+                setState { copy(selectedDate = addMonthsToDate(selectedDate, 1))  }
+            }
+            LayoutContract.Event.OnPreviousMonthClicked -> {
+                setState { copy(selectedDate = addMonthsToDate(selectedDate, -1))  }
+            }
         }
     }
 
@@ -106,6 +117,13 @@ class LayoutViewModel @Inject constructor(
         }else{
             setEffect { LayoutContract.Effect.Navigation.Back }
         }
+    }
+
+    fun addMonthsToDate(date: Date, months: Int): Date {
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        calendar.add(Calendar.MONTH, months)
+        return calendar.time
     }
 
     override fun onCleared() {
